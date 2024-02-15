@@ -4,6 +4,7 @@ import {useState} from "react";
 import PropTypes from "prop-types";
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {useNavigate} from "react-router-dom";
+import MainForm from "../../../../components/MainForm/MainForm.jsx";
 
 export default function EntryInquiryForm({hostingList, buttonStyle}) {
     const [hostingSite, setHostingSite] = useState('self');
@@ -17,8 +18,7 @@ export default function EntryInquiryForm({hostingList, buttonStyle}) {
     };
 
     return (
-        <section className={styles.container}>
-            <h1 className={styles.title}>홈페이지 구축 방법을 선택해주세요</h1>
+        <MainForm title={"홈페이지 구축 방법을 선택해주세요"}>
             <ul className={styles.content}>
                 <li>
                     <MainCheckBox
@@ -57,7 +57,7 @@ export default function EntryInquiryForm({hostingList, buttonStyle}) {
                             onClick={handleNextButtonClick}
                 />
             </div>
-        </section>
+        </MainForm>
     )
 }
 

@@ -1,0 +1,16 @@
+.formContainer {
+    /*border: 1px solid red;*/
+}
+.formContainer > * {
+    margin: 1rem;
+}
+.titleWrapper {
+    border-bottom: 2px solid var(--subFontColor);
+    padding: 1rem 0;
+}
+.titleWrapper > * {
+    margin: 1rem 0;
+}
+.description {
+    color: var(--subFontColor);
+}

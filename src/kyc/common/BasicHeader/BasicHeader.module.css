@@ -1,0 +1,7 @@
+.container {
+    /*border: 1px dashed tomato;*/
+}
+.title {
+    font-size: var(--titleFontSize-1);
+    text-align: center;
+}

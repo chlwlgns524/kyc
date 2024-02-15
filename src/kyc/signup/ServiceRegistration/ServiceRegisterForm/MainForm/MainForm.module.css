@@ -1,0 +1,17 @@
+.maxtrix {
+    border-top: 2px solid var(--subFontColor);
+    margin: 1rem 0;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    gap: 2rem;
+}
+.description {
+    color: var(--subFontColor);
+}
+.signupForm {
+    /*border: 1px solid red;*/
+}
+.signupForm > * {
+    margin: 1rem;
+}

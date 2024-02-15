@@ -3,7 +3,7 @@ import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {Fragment, useState} from "react";
 import validateId from "./MainForm/UserInput/Validator/idValidator.js";
 import Agreement from "./Agreement/Agreement.jsx";
-import MainForm from "./MainForm/MainForm.jsx";
+import UserInfoForm from "./MainForm/UserInfoForm.jsx";
 import validatePassword from "./MainForm/UserInput/Validator/passwordValidator.js";
 import validatePasswordCheck from "./MainForm/UserInput/Validator/passwordCheckValidator.js";
 import validateCompany from "./MainForm/UserInput/Validator/companyValidator.js";
@@ -11,6 +11,7 @@ import validateManager from "./MainForm/UserInput/Validator/managerValidator.js"
 import validateManagerEmail from "./MainForm/UserInput/Validator/managerEmailValidator.js";
 import validatePhoneNumber from "./MainForm/UserInput/Validator/managerPhoneNumberValidator.js";
 import {AGREEMENT, PRIVACY, MARKETING} from "../../../../assets/reference/term-details.js";
+import {useNavigate} from "react-router-dom";
 
 export default function ServiceRegisterationForm() {
     console.log('<ServiceRegisterationForm/> rendered!');
@@ -149,6 +150,8 @@ export default function ServiceRegisterationForm() {
         setUser(updatedUser);
     }
 
+    const navigate = useNavigate();
+
     return (
         <section className={styles.container}>
             <Agreement
@@ -156,7 +159,7 @@ export default function ServiceRegisterationForm() {
                 setAgreementChecked={setAgreementCheckedList}
                 agreementDetails={agreementDetails}
             />
-            <MainForm
+            <UserInfoForm
                 user={user}
                 userInputList={userInputList}
                 pickUserInput={pickUserInput}
@@ -166,6 +169,7 @@ export default function ServiceRegisterationForm() {
                     if (checkAgreementCheckList(agreementCheckedList) && checkUserInfo(user)) {
                         alert('회원가입 성공!');
                         console.log(agreementCheckedList, user);
+                        navigate("/business-info");
                     }
                 }}/>
             </div>

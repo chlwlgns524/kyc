@@ -6,12 +6,3 @@
     grid-template-columns: repeat(2, minmax(200px, 1fr));
     gap: 2rem;
 }
-.description {
-    color: var(--subFontColor);
-}
-.signupForm {
-    /*border: 1px solid red;*/
-}
-.signupForm > * {
-    margin: 1rem;
-}

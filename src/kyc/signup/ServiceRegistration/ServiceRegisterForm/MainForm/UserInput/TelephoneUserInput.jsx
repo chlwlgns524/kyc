@@ -35,7 +35,9 @@ export default function TelephoneUserInput({id, label, validator, pickUserInput}
                                 <option key={frontNumber} value={frontNumber}>{frontNumber}</option>)
                         }
                     </select>
-                    <input type="text"
+                    <input
+                        autoComplete="off"
+                        type='text'
                            id={id}
                            value={userInput}
                            onChange={e => hanldeUserInput(e.target.value)}/>{userInput !== '' && !valid && <span>!</span>}

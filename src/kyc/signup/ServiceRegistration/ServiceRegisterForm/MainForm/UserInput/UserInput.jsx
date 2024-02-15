@@ -26,7 +26,9 @@ export default function UserInput({id, label, referenceValue, validator, pickUse
             <label htmlFor={id}>{label}</label>
             <div className={styles.userInputWrapper}>
                 <div className={`${styles.userInput} ${userInput !== '' && !valid ? styles.warningBox : undefined}`}>
-                    <input type={`${isPasswordRelated(id) ? 'password' : 'text'}`}
+                    <input
+                        autoComplete="off"
+                        type={`${isPasswordRelated(id) ? 'password' : 'text'}`}
                            id={id}
                            value={userInput}
                            onChange={e => hanldeUserInput(e.target.value)}/>{userInput !== '' && !valid && <span>!</span>}

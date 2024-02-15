@@ -1,0 +1,13 @@
+.layout {
+    /*border: 1px dashed black;*/
+    padding: 2rem;
+}
+.contentWrapper {
+    /*border: 1px dashed orange;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+    margin: 3rem 6rem;
+    padding: 3rem 6rem;
+}

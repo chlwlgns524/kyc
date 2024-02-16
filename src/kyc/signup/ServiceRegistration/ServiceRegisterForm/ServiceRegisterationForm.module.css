@@ -4,8 +4,3 @@
 .container > * {
     margin: 2rem 0;
 }
-.buttonContainer {
-    display: flex;
-    justify-content: center;
-    margin: 3rem;
-}

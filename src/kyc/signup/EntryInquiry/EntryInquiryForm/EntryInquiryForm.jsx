@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {useNavigate} from "react-router-dom";
 import MainForm from "../../../../components/MainForm/MainForm.jsx";
+import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
 
 export default function EntryInquiryForm({hostingList, buttonStyle}) {
     const [hostingSite, setHostingSite] = useState('self');
@@ -51,12 +52,12 @@ export default function EntryInquiryForm({hostingList, buttonStyle}) {
                     }
                 </li>
             </ul>
-            <div className={styles.buttonContainer}>
+            <MainButtonContainer>
                 <MainButton label={"다음"}
                             style={buttonStyle}
                             onClick={handleNextButtonClick}
                 />
-            </div>
+            </MainButtonContainer>
         </MainForm>
     )
 }

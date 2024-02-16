@@ -12,6 +12,7 @@ import validateManagerEmail from "./MainForm/UserInput/Validator/managerEmailVal
 import validatePhoneNumber from "./MainForm/UserInput/Validator/managerPhoneNumberValidator.js";
 import {AGREEMENT, PRIVACY, MARKETING} from "../../../../assets/reference/term-details.js";
 import {useNavigate} from "react-router-dom";
+import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
 
 export default function ServiceRegisterationForm() {
     console.log('<ServiceRegisterationForm/> rendered!');
@@ -164,7 +165,7 @@ export default function ServiceRegisterationForm() {
                 userInputList={userInputList}
                 pickUserInput={pickUserInput}
             />
-            <div className={styles.buttonContainer}>
+            <MainButtonContainer>
                 <MainButton label={"회원가입"} onClick={() => {
                     if (checkAgreementCheckList(agreementCheckedList) && checkUserInfo(user)) {
                         alert('회원가입 성공!');
@@ -172,7 +173,7 @@ export default function ServiceRegisterationForm() {
                         navigate("/business-info");
                     }
                 }}/>
-            </div>
+            </MainButtonContainer>
         </section>
     )
 }

@@ -23,9 +23,10 @@ export default function EntryInquiryForm({hostingList, buttonStyle}) {
             <ul className={styles.content}>
                 <li>
                     <MainCheckBox
+                        id={'self'}
                         checked={hostingSite === 'self'}
                         onChange={() => setHostingSite('self')}/>
-                    직접 구축 | <span className={styles.sub}>가맹점이 직접 홈페이지를 구축한 경우</span>
+                    <label htmlFor="self">직접 구축</label> | <span className={styles.sub}>가맹점이 직접 홈페이지를 구축한 경우</span>
                 </li>
                 <li>
                     <MainCheckBox

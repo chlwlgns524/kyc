@@ -8,10 +8,11 @@
 
     /* COLOR */
     --primaryColor: #0c4cf6;
+    --primaryColor-sub: #a6bcf8;
     --primaryColor-hover: #067ffa;
     --subFontColor: #868484;
     --disabledColor: #dad8d8;
-    --confirColor: #366dfd;
+    --confirmColor: #366dfd;
     --warningColor: #f83c3c;
 
 }

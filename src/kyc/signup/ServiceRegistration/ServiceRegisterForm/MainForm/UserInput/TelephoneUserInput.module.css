@@ -45,7 +45,7 @@
 }
 .essential,
 .confirm {
-    color: var(--confirColor);
+    color: var(--confirmColor);
 }
 .warn {
     color: var(--warningColor);

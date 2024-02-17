@@ -24,5 +24,5 @@ function validateIfLengthOfPasswordIsEnough(userInput) {
 
 function validateIfAllLettersAreIncluded(userInput) {
     const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
-    return regex.test(userInput) ? satisfiedResult : {result: false, message: "영문(대/소문자 구분), 숫자, 특수문자를 포함하여 입력해 주세요."};
+    return regex.test(userInput) ? satisfiedResult : {result: false, message: "영문, 숫자, 특수문자를 포함하여 입력해 주세요."};
 }

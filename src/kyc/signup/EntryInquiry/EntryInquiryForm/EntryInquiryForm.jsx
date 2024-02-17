@@ -4,6 +4,8 @@ import {useState} from "react";
 import PropTypes from "prop-types";
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {useNavigate} from "react-router-dom";
+import MainForm from "../../../../components/MainForm/MainForm.jsx";
+import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
 
 export default function EntryInquiryForm({hostingList, buttonStyle}) {
     const [hostingSite, setHostingSite] = useState('self');
@@ -17,14 +19,14 @@ export default function EntryInquiryForm({hostingList, buttonStyle}) {
     };
 
     return (
-        <section className={styles.container}>
-            <h1 className={styles.title}>홈페이지 구축 방법을 선택해주세요</h1>
+        <MainForm title={"홈페이지 구축 방법을 선택해주세요"}>
             <ul className={styles.content}>
                 <li>
                     <MainCheckBox
+                        id={'self'}
                         checked={hostingSite === 'self'}
                         onChange={() => setHostingSite('self')}/>
-                    직접 구축 | <span className={styles.sub}>가맹점이 직접 홈페이지를 구축한 경우</span>
+                    <label htmlFor="self">직접 구축</label> | <span className={styles.sub}>가맹점이 직접 홈페이지를 구축한 경우</span>
                 </li>
                 <li>
                     <MainCheckBox
@@ -51,13 +53,13 @@ export default function EntryInquiryForm({hostingList, buttonStyle}) {
                     }
                 </li>
             </ul>
-            <div className={styles.buttonContainer}>
+            <MainButtonContainer>
                 <MainButton label={"다음"}
                             style={buttonStyle}
                             onClick={handleNextButtonClick}
                 />
-            </div>
-        </section>
+            </MainButtonContainer>
+        </MainForm>
     )
 }
 

@@ -1,0 +1,36 @@
+.container {
+    /*border: 1px dashed black;*/
+}
+.item {
+    /*border: 1px dashed orange;*/
+    width: 50%;
+}
+.itemTitle {
+
+}
+.itemWrapper {
+    /*border: 3px dashed tomato;*/
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.itemWrapper > * {
+    width: 50%;
+}
+.radioButtons {
+    /*border: 3px dashed red;*/
+    display: flex;
+}
+.radioButtons > * {
+    flex: 1;
+}
+.radioButton {
+    /*border: 1px dashed blue;*/
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.radioButton > label {
+    font-size: var(--subFontSize-1);
+    color: var(--subFontColor)
+}

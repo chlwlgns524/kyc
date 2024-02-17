@@ -1,20 +1,9 @@
 li > * {
     margin-right: .5rem;
 }
-.container {
-    /*border: 1px dashed tomato;*/
-}
-.buttonContainer {
-    display: flex;
-    justify-content: center;
-    margin: 3rem;
-}
 .title {
     font-size: var(--titleFontSize-3);
     padding: 1rem;
-}
-.content {
-    border-top: 2px solid var(--subFontColor);
 }
 .content > li {
     margin: 2rem;

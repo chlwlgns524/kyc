@@ -3,7 +3,7 @@ import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {Fragment, useState} from "react";
 import validateId from "./MainForm/UserInput/Validator/idValidator.js";
 import Agreement from "./Agreement/Agreement.jsx";
-import MainForm from "./MainForm/MainForm.jsx";
+import UserInfoForm from "./MainForm/UserInfoForm.jsx";
 import validatePassword from "./MainForm/UserInput/Validator/passwordValidator.js";
 import validatePasswordCheck from "./MainForm/UserInput/Validator/passwordCheckValidator.js";
 import validateCompany from "./MainForm/UserInput/Validator/companyValidator.js";
@@ -11,6 +11,8 @@ import validateManager from "./MainForm/UserInput/Validator/managerValidator.js"
 import validateManagerEmail from "./MainForm/UserInput/Validator/managerEmailValidator.js";
 import validatePhoneNumber from "./MainForm/UserInput/Validator/managerPhoneNumberValidator.js";
 import {AGREEMENT, PRIVACY, MARKETING} from "../../../../assets/reference/term-details.js";
+import {useNavigate} from "react-router-dom";
+import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
 
 export default function ServiceRegisterationForm() {
     console.log('<ServiceRegisterationForm/> rendered!');
@@ -98,6 +100,7 @@ export default function ServiceRegisterationForm() {
             id: 'id',
             label: '아이디',
             validator: validateId,
+            essential: true,
         },
         {
             id: '',
@@ -105,17 +108,20 @@ export default function ServiceRegisterationForm() {
         {
             id: 'password',
             label: '비밀번호',
-            validator: validatePassword
+            validator: validatePassword,
+            essential: true,
         },
         {
             id: 'passwordCheck',
             label: '비밀번호 확인',
-            validator: validatePasswordCheck
+            validator: validatePasswordCheck,
+            essential: true,
         },
         {
             id: 'company',
             label: '회사명',
-            validator: validateCompany
+            validator: validateCompany,
+            essential: true,
         },
         {
             id: '',
@@ -123,24 +129,27 @@ export default function ServiceRegisterationForm() {
         {
             id: 'manager',
             label: '운영담당자명',
-            validator: validateManager
+            validator: validateManager,
+            essential: true,
         },
         {
             id: 'managerEmail',
             label: '운영담당자 이메일',
-            validator: validateManagerEmail
+            validator: validateManagerEmail,
+            essential: true,
         },
         {
             id: 'managerMobile',
             label: '운영담당자 휴대전화번호',
-            validator: validatePhoneNumber
+            validator: validatePhoneNumber,
+            essential: true,
         },
         {
             id: 'managerTelephone',
             label: '운영담당자 유선전화번호',
-            validator: validatePhoneNumber
+            validator: validatePhoneNumber,
+            essential: false
         }
-
     ];
 
     const pickUserInput = (id, validated, value) => {
@@ -149,6 +158,8 @@ export default function ServiceRegisterationForm() {
         setUser(updatedUser);
     }
 
+    const navigate = useNavigate();
+
     return (
         <section className={styles.container}>
             <Agreement
@@ -156,19 +167,20 @@ export default function ServiceRegisterationForm() {
                 setAgreementChecked={setAgreementCheckedList}
                 agreementDetails={agreementDetails}
             />
-            <MainForm
+            <UserInfoForm
                 user={user}
                 userInputList={userInputList}
                 pickUserInput={pickUserInput}
             />
-            <div className={styles.buttonContainer}>
+            <MainButtonContainer>
                 <MainButton label={"회원가입"} onClick={() => {
                     if (checkAgreementCheckList(agreementCheckedList) && checkUserInfo(user)) {
                         alert('회원가입 성공!');
                         console.log(agreementCheckedList, user);
+                        navigate("/business-info");
                     }
                 }}/>
-            </div>
+            </MainButtonContainer>
         </section>
     )
 }

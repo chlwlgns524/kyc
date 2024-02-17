@@ -1,16 +1,16 @@
 import BasicLayout from "../../../layout/BasicLayout/BasicLayout.jsx";
 import BasicHeader from "../../common/BasicHeader/BasicHeader.jsx";
-import ServiceRegistrationForm from "./ServiceRegisterForm/ServiceRegisterationForm.jsx";
+import BusinessInfoForm from "./BusinessInfoForm/BusinessInfoForm.jsx";
 import StateTransitionDiagram from "../../common/Diagram/StateTransitionDiagram.jsx";
 
-export default function ServiceRegistration() {
+export default function BusinessInfo() {
     return (
         <BasicLayout
             Header={() => <BasicHeader
-                title={"온라인 결제서비스 회원가입"}
-                diagram={() => <StateTransitionDiagram current={'2'}/>}
+                title={"사업자 정보 입력"}
+                diagram={() => <StateTransitionDiagram  current={'3'}/>}
             />}
-            Body={() => <ServiceRegistrationForm/>}
+            Body={() => <BusinessInfoForm/>}
         />
     )
 }

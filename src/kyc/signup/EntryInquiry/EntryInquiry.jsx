@@ -1,6 +1,7 @@
 import BasicLayout from "../../../layout/BasicLayout/BasicLayout.jsx";
 import BasicHeader from "../../common/BasicHeader/BasicHeader.jsx";
 import EntryInquiryForm from "./EntryInquiryForm/EntryInquiryForm.jsx";
+import StateTransitionDiagram from "../../common/Diagram/StateTransitionDiagram.jsx";
 
 const HOSTING_SITES = [
     {
@@ -50,7 +51,10 @@ export default function EntryInquiry() {
 
     return (
         <BasicLayout
-            Header={() => <BasicHeader title={"온라인 결제 서비스 신청"}/>}
+            Header={() => <BasicHeader
+                title={"온라인 결제 서비스 신청"}
+                diagram={() => <StateTransitionDiagram current={"1"}/>}
+            />}
             Body={() => <EntryInquiryForm hostingList={HOSTING_SITES} buttonStyle={buttonStyle}/>}
         />
     )

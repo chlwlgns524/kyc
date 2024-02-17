@@ -1,0 +1,57 @@
+.container {
+    position: relative;
+    margin: 3rem;
+}
+.lines {
+    /*background-color: green;*/
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: .25rem;
+    display: flex;
+}
+.line {
+    flex: 1;
+    background-color: var(--disabledColor);
+}
+.circles {
+    /*border: 2px dashed var(--primaryColor);*/
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1000;
+}
+.circleWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.circleWrapper > .label {
+    /*border: 1px dashed orange;*/
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+}
+.circle {
+    position: relative;
+    background-color: var(--disabledColor);
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.circle > .image {
+
+}
+
+/* DYNAMIC CLASSES*/
+.done {
+    background-color: var(--primaryColor-sub);
+}
+.ing,
+.current {
+    background-color: var(--primaryColor);
+}

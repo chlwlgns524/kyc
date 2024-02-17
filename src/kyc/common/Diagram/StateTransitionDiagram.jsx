@@ -30,11 +30,10 @@ export default function StateTransitionDiagram({current}) {
                         .map((state, index) =>
                             <div key={state.label}
                                  className={`
-                                 ${styles.line} 
-                                 ${(index + 2) < parseInt(current) ? styles.done : ((index + 2) === parseInt(current) ? styles.ing : "")}
-                                 `}>
-
-                            </div>)
+                                 ${styles.line}
+                                 ${((index + 1) < current ? styles.done : '')}
+                                 `}></div>
+                        )
                 }
             </div>
             <div className={styles.circles}>

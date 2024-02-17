@@ -100,6 +100,7 @@ export default function ServiceRegisterationForm() {
             id: 'id',
             label: '아이디',
             validator: validateId,
+            essential: true,
         },
         {
             id: '',
@@ -107,17 +108,20 @@ export default function ServiceRegisterationForm() {
         {
             id: 'password',
             label: '비밀번호',
-            validator: validatePassword
+            validator: validatePassword,
+            essential: true,
         },
         {
             id: 'passwordCheck',
             label: '비밀번호 확인',
-            validator: validatePasswordCheck
+            validator: validatePasswordCheck,
+            essential: true,
         },
         {
             id: 'company',
             label: '회사명',
-            validator: validateCompany
+            validator: validateCompany,
+            essential: true,
         },
         {
             id: '',
@@ -125,24 +129,27 @@ export default function ServiceRegisterationForm() {
         {
             id: 'manager',
             label: '운영담당자명',
-            validator: validateManager
+            validator: validateManager,
+            essential: true,
         },
         {
             id: 'managerEmail',
             label: '운영담당자 이메일',
-            validator: validateManagerEmail
+            validator: validateManagerEmail,
+            essential: true,
         },
         {
             id: 'managerMobile',
             label: '운영담당자 휴대전화번호',
-            validator: validatePhoneNumber
+            validator: validatePhoneNumber,
+            essential: true,
         },
         {
             id: 'managerTelephone',
             label: '운영담당자 유선전화번호',
-            validator: validatePhoneNumber
+            validator: validatePhoneNumber,
+            essential: false
         }
-
     ];
 
     const pickUserInput = (id, validated, value) => {

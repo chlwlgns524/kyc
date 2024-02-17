@@ -2,7 +2,7 @@ import styles from "./TelephoneUserInput.module.css";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 
-export default function TelephoneUserInput({id, label, validator, pickUserInput}) {
+export default function TelephoneUserInput({id, label, validator, essential, pickUserInput}) {
     const [message, setMessage] = useState('');
     const [frontNumber, setFrontNumber] = useState('');
     const [userInput, setUserInput] = useState('');
@@ -25,7 +25,7 @@ export default function TelephoneUserInput({id, label, validator, pickUserInput}
 
     return (
         <div className={styles.item}>
-            <label htmlFor={id}>{label}</label>
+            <label htmlFor={id}>{label} {essential ? <span className={styles.essential}>*</span> : undefined}</label>
             <div className={styles.telephoneUserInputWrapper}>
                 <div className={`${styles.telephoneUserInput} ${userInput !== '' && !valid ? styles.warningBox : undefined}`}>
                     <select onChange={e => setFrontNumber(e.target.value)}>
@@ -68,5 +68,6 @@ TelephoneUserInput.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     validator: PropTypes.func.isRequired,
+    essential: PropTypes.bool.isRequired,
     pickUserInput: PropTypes.func.isRequired
 }

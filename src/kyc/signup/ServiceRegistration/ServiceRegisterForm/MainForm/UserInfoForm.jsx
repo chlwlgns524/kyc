@@ -27,6 +27,7 @@ export default function UserInfoForm({user, userInputList, pickUserInput}) {
                                     id={userInput.id}
                                     label={userInput.label}
                                     validator={userInput.validator}
+                                    essential={userInput.essential}
                                     pickUserInput={pickUserInput}
                                 />
                             default:
@@ -36,6 +37,7 @@ export default function UserInfoForm({user, userInputList, pickUserInput}) {
                                     label={userInput.label}
                                     referenceValue={currentPassword}
                                     validator={userInput.validator}
+                                    essential={userInput.essential}
                                     pickUserInput={pickUserInput}
                                 />
                         }

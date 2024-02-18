@@ -1,15 +1,15 @@
 import styles from './ServiceRegisterationForm.module.css';
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {Fragment, useState} from "react";
-import validateId from "./MainForm/UserInput/Validator/idValidator.js";
+import validateId from "../../../common/UserInfoForm/UserInput/Validator/idValidator.js";
 import Agreement from "./Agreement/Agreement.jsx";
-import UserInfoForm from "./MainForm/UserInfoForm.jsx";
-import validatePassword from "./MainForm/UserInput/Validator/passwordValidator.js";
-import validatePasswordCheck from "./MainForm/UserInput/Validator/passwordCheckValidator.js";
-import validateCompany from "./MainForm/UserInput/Validator/companyValidator.js";
-import validateManager from "./MainForm/UserInput/Validator/managerValidator.js";
-import validateManagerEmail from "./MainForm/UserInput/Validator/managerEmailValidator.js";
-import validatePhoneNumber from "./MainForm/UserInput/Validator/managerPhoneNumberValidator.js";
+import UserInfoForm from "../../../common/UserInfoForm/UserInfoForm.jsx";
+import validatePassword from "../../../common/UserInfoForm/UserInput/Validator/passwordValidator.js";
+import validatePasswordCheck from "../../../common/UserInfoForm/UserInput/Validator/passwordCheckValidator.js";
+import validateCompany from "../../../common/UserInfoForm/UserInput/Validator/companyValidator.js";
+import validateManager from "../../../common/UserInfoForm/UserInput/Validator/managerValidator.js";
+import validateManagerEmail from "../../../common/UserInfoForm/UserInput/Validator/managerEmailValidator.js";
+import validatePhoneNumber from "../../../common/UserInfoForm/UserInput/Validator/managerPhoneNumberValidator.js";
 import {AGREEMENT, PRIVACY, MARKETING} from "../../../../assets/reference/term-details.js";
 import {useNavigate} from "react-router-dom";
 import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
@@ -158,6 +158,7 @@ export default function ServiceRegisterationForm() {
         setUser(updatedUser);
     }
 
+    const currentPassword = getCurrentPassword(user);
     const navigate = useNavigate();
 
     return (
@@ -168,21 +169,27 @@ export default function ServiceRegisterationForm() {
                 agreementDetails={agreementDetails}
             />
             <UserInfoForm
-                user={user}
+                title={'회원가입'}
+                description={'이후 회원가입 프로세스 진행 및 서비스 관리자 페이지 접속을 위해 필요한 로그인 정보를 생성합니다.'}
+                referenceValue={currentPassword}
                 userInputList={userInputList}
                 pickUserInput={pickUserInput}
-            />
+             />
             <MainButtonContainer>
-                <MainButton label={"회원가입"} onClick={() => {
+                <MainButton label={'회원가입'} onClick={() => {
                     if (checkAgreementCheckList(agreementCheckedList) && checkUserInfo(user)) {
                         alert('회원가입 성공!');
                         console.log(agreementCheckedList, user);
-                        navigate("/business-info");
+                        navigate('/business-info');
                     }
                 }}/>
             </MainButtonContainer>
         </section>
     )
+}
+
+function getCurrentPassword(user) {
+    return user.find(info => info.id === 'password').value ?? '';
 }
 
 function checkAgreementCheckList(agreementCheckedList) {

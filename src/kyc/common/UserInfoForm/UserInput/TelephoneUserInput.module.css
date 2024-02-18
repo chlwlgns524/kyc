@@ -4,14 +4,14 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     padding: 1rem;
 }
-.userInputWrapper {
+.telephoneUserInputWrapper {
     /*border: 1px dashed red;*/
     display: flex;
     flex-direction: column;
     height: 3.5rem;
 }
-.userInput {
-    border: 1px solid var(--disabledColor);
+.telephoneUserInput {
+    border: 1px solid var(--disabledColor-100);
     padding: .35rem 1rem;
     height: 2rem;
     border-radius: 5px;
@@ -20,13 +20,16 @@
     align-items: center;
     gap: 1rem;
 }
-.warningBox {
-    border: 1px solid red;
+.telephoneUserInput > select {
+    border: none;
 }
-.userInput > input {
+.warningBox {
+    border-color: red;
+}
+.telephoneUserInput > input {
     flex: 9;
 }
-.userInput > span {
+.telephoneUserInput > span {
     border: 2px solid red;
     text-align: center;
     font-size: 1.25rem;
@@ -35,7 +38,7 @@
     width: 1.25rem;
     height: 1.25rem;
 }
-.userInput + span {
+.telephoneUserInput + span {
     text-align: right;
     padding: .25rem;
     font-size: var(--subFontSize-1);

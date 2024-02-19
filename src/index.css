@@ -11,7 +11,14 @@
     --primaryColor-sub: #a6bcf8;
     --primaryColor-hover: #067ffa;
     --subFontColor: #868484;
-    --disabledColor: #dad8d8;
+
+    --disabledColor-100: #dad8d8;
+    --disabledColor-200: #b2b2b2;
+    --disabledColor-300: #939292;
+    --disabledColor-400: #6e6d6d;
+    --disabledColor-500: #4f4e4e;
+    --disabledColor-600: #313131;
+
     --confirmColor: #366dfd;
     --warningColor: #f83c3c;
 

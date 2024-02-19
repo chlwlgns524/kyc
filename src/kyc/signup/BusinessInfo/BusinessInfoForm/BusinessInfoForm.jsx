@@ -4,6 +4,7 @@ import MainCheckBox from "../../../../components/MainCheckBox/MainCheckBox.jsx";
 import {useReducer} from "react";
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
+import {Link} from "react-router-dom";
 
 const initialState = {
     businessLocation: "domestic",
@@ -80,7 +81,7 @@ export default function BusinessInfoForm() {
                 </li>
             </ul>
             <MainButtonContainer>
-                <MainButton label={'다음'}/>
+                <Link to={'/business-info-domestic'}><MainButton label={'다음'}/></Link>
             </MainButtonContainer>
         </MainForm>
     )

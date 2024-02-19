@@ -12,7 +12,7 @@
 }
 .line {
     flex: 1;
-    background-color: var(--disabledColor);
+    background-color: var(--disabledColor-100);
 }
 .circles {
     /*border: 2px dashed var(--primaryColor);*/
@@ -30,11 +30,11 @@
     /*border: 1px dashed orange;*/
     position: absolute;
     bottom: 0;
-    transform: translateY(100%);
+    transform: translateY(150%);
 }
 .circle {
     position: relative;
-    background-color: var(--disabledColor);
+    background-color: var(--disabledColor-100);
     width: 7rem;
     height: 7rem;
     border-radius: 50%;

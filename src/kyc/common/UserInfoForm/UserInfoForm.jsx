@@ -4,6 +4,9 @@ import TelephoneUserInput from "./UserInput/TelephoneUserInput.jsx";
 import MainForm from "../../../components/MainForm/MainForm.jsx";
 import Matrix from "../../../components/Matrix/Matrix.jsx";
 import UploadUserInput from "./UserInput/UploadUserInput.jsx";
+import CategoryUserInput from "./UserInput/CategoryUserInput.jsx";
+import AmountUserInput from "./UserInput/AmountUserInput.jsx";
+import {INPUT_TYPE} from "./input-type.js";
 
 export default function UserInfoForm({title, description, referenceValue, userInputList, pickUserInput}) {
     console.log("<UserInfoForm/> rendered!");
@@ -16,11 +19,10 @@ export default function UserInfoForm({title, description, referenceValue, userIn
             <Matrix>
                 {
                     userInputList.map((userInput, index) => {
-                        switch (userInput.id) {
+                        switch (userInput.inputType) {
                             case '':
                                 return <div key={index}></div>
-                            case 'managerMobile':
-                            case 'managerTelephone':
+                            case INPUT_TYPE.CONTACT:
                                 return <TelephoneUserInput
                                     key={userInput.id}
                                     id={userInput.id}
@@ -29,16 +31,33 @@ export default function UserInfoForm({title, description, referenceValue, userIn
                                     essential={userInput.essential}
                                     pickUserInput={pickUserInput}
                                 />
-                            case 'businessLicense':
+                            case INPUT_TYPE.UPLOAD:
                                 return <UploadUserInput
                                     key={userInput.id}
                                     id={userInput.id}
                                     label={userInput.label}
                                     essential={userInput.essential}
-                                    pickUserInput={userInput.pickUserInput}
-                                    validator={userInput.validator}
+                                    pickUserInput={pickUserInput}
                                 />
-                            default:
+                            case INPUT_TYPE.CATEGORY:
+                                return <CategoryUserInput
+                                    key={userInput.id}
+                                    id={userInput.id}
+                                    label={userInput.label}
+                                    validator={userInput.validator}
+                                    essential={userInput.essential}
+                                    pickUserInput={pickUserInput}
+                                />
+                            case INPUT_TYPE.AMOUNT:
+                                return <AmountUserInput
+                                key={userInput.id}
+                                id={userInput.id}
+                                label={userInput.label}
+                                validator={userInput.validator}
+                                essential={userInput.essential}
+                                pickUserInput={pickUserInput}
+                                />
+                            case INPUT_TYPE.BASIC:
                                 return <UserInput
                                     key={userInput.id}
                                     id={userInput.id}

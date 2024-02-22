@@ -3,16 +3,17 @@ import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {Fragment, useState} from "react";
 import validateId from "../../../common/UserInfoForm/UserInput/Validator/idValidator.js";
 import Agreement from "./Agreement/Agreement.jsx";
-import UserInfoForm from "../../../common/UserInfoForm/UserInfoForm.jsx";
 import validatePassword from "../../../common/UserInfoForm/UserInput/Validator/passwordValidator.js";
 import validatePasswordCheck from "../../../common/UserInfoForm/UserInput/Validator/passwordCheckValidator.js";
-import validateCompany from "../../../common/UserInfoForm/UserInput/Validator/companyValidator.js";
+import validateCompany from "../../../common/UserInfoForm/UserInput/Validator/companyNameValidator.js";
 import validateManager from "../../../common/UserInfoForm/UserInput/Validator/managerValidator.js";
 import validateManagerEmail from "../../../common/UserInfoForm/UserInput/Validator/managerEmailValidator.js";
 import validatePhoneNumber from "../../../common/UserInfoForm/UserInput/Validator/managerPhoneNumberValidator.js";
 import {AGREEMENT, PRIVACY, MARKETING} from "../../../../assets/reference/term-details.js";
 import {useNavigate} from "react-router-dom";
 import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
+import {INPUT_TYPE} from "../../../common/UserInfoForm/input-type.js";
+import UserInfoForm from "../../../common/UserInfoForm/UserInfoForm.jsx";
 
 export default function ServiceRegisterationForm() {
     console.log('<ServiceRegisterationForm/> rendered!');
@@ -98,54 +99,64 @@ export default function ServiceRegisterationForm() {
     const userInputList = [
         {
             id: 'id',
+            inputType: INPUT_TYPE.BASIC,
             label: '아이디',
             validator: validateId,
             essential: true,
         },
         {
             id: '',
+            inputType: '',
         },
         {
             id: 'password',
+            inputType: INPUT_TYPE.BASIC,
             label: '비밀번호',
             validator: validatePassword,
             essential: true,
         },
         {
             id: 'passwordCheck',
+            inputType: INPUT_TYPE.BASIC,
             label: '비밀번호 확인',
             validator: validatePasswordCheck,
             essential: true,
         },
         {
             id: 'company',
+            inputType: INPUT_TYPE.BASIC,
             label: '회사명',
             validator: validateCompany,
             essential: true,
         },
         {
             id: '',
+            inputType: '',
         },
         {
             id: 'manager',
+            inputType: INPUT_TYPE.BASIC,
             label: '운영담당자명',
             validator: validateManager,
             essential: true,
         },
         {
             id: 'managerEmail',
+            inputType: INPUT_TYPE.BASIC,
             label: '운영담당자 이메일',
             validator: validateManagerEmail,
             essential: true,
         },
         {
             id: 'managerMobile',
+            inputType: INPUT_TYPE.CONTACT,
             label: '운영담당자 휴대전화번호',
             validator: validatePhoneNumber,
             essential: true,
         },
         {
             id: 'managerTelephone',
+            inputType: INPUT_TYPE.CONTACT,
             label: '운영담당자 유선전화번호',
             validator: validatePhoneNumber,
             essential: false

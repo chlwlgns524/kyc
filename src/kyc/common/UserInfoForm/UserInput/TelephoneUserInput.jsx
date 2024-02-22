@@ -1,4 +1,4 @@
-import styles from "./TelephoneUserInput.module.css";
+import "./UserInput.css";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 
@@ -24,10 +24,10 @@ export default function TelephoneUserInput({id, label, validator, essential, pic
     }, [frontNumber]);
 
     return (
-        <div className={styles.item}>
-            <label htmlFor={id}>{label} {essential ? <span className={styles.essential}>*</span> : undefined}</label>
-            <div className={styles.telephoneUserInputWrapper}>
-                <div className={`${styles.telephoneUserInput} ${userInput !== '' && !valid ? styles.warningBox : undefined}`}>
+        <div className="item">
+            <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
+            <div className="userInputWrapper">
+                <div className={`userInput ${userInput !== '' && !valid ? "warningBox" : ""}`}>
                     <select onChange={e => setFrontNumber(e.target.value)}>
                         <option value="">선택</option>
                         {
@@ -42,7 +42,7 @@ export default function TelephoneUserInput({id, label, validator, essential, pic
                            value={userInput}
                            onChange={e => hanldeUserInput(e.target.value)}/>{userInput !== '' && !valid && <span>!</span>}
                 </div>
-                <span className={userInput === '' ? '' : (valid ? styles.confirm : styles.warn)}>{userInput !== '' ? message : ''}</span>
+                <span className={userInput === '' ? '' : (valid ? "confirm" : "warn")}>{userInput !== '' ? message : ''}</span>
             </div>
         </div>
     )

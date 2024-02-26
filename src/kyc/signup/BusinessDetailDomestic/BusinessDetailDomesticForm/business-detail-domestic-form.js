@@ -7,6 +7,8 @@ import {validateBusinessNumber} from "../../../common/UserInfoForm/UserInput/Val
 import {validateBusinessType} from "../../../common/UserInfoForm/UserInput/Validator/businessTypeValidator.js";
 import {validateIndustry} from "../../../common/UserInfoForm/UserInput/Validator/industryValidator.js";
 import {validateAmount} from "../../../common/UserInfoForm/UserInput/Validator/amountValidator.js";
+import {validateCategory} from "../../../common/UserInfoForm/UserInput/Validator/categoryValidator.js";
+import {validateAddress} from "../../../common/UserInfoForm/UserInput/Validator/addressValidator.js";
 
 export const BUSINESS_DETAIL_DOMESTIC_FORM_ID = {
     businessLicese: 'businessLicese',
@@ -19,6 +21,7 @@ export const BUSINESS_DETAIL_DOMESTIC_FORM_ID = {
     productType: 'productType',
     customerTransaction: 'customerTransaction',
     estimatedVolumePerMonth: 'estimatedVolumePerMonth',
+    address: 'address',
     representativeTelephone: 'representativeTelephone',
     representativeEmail: 'representativeEmail'
 }
@@ -34,6 +37,7 @@ export const USER_INPUT_LIST = [
         id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.businessNumber,
         inputType: INPUT_TYPE.BASIC,
         label: '사업자등록번호',
+        placeholder: '-를 포함해서 입력해주세요.',
         validator: validateBusinessNumber,
         essential: true,
     },
@@ -80,7 +84,7 @@ export const USER_INPUT_LIST = [
         id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.productType,
         inputType: INPUT_TYPE.CATEGORY,
         label: '판매 상품의 종류',
-        validator: validateIndustry,
+        validator: validateCategory,
         essential: true
     },
     {
@@ -92,7 +96,7 @@ export const USER_INPUT_LIST = [
     },
     {
         id: '',
-        inputType: '',
+        inputType: ''
     },
     {
         id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.estimatedVolumePerMonth,
@@ -102,13 +106,17 @@ export const USER_INPUT_LIST = [
         essential: true
     },
     {
-        id: '',
-        inputType: ''
+        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.address,
+        inputType: INPUT_TYPE.ADDRESS,
+        label: '사업장 주소',
+        validator: validateAddress,
+        essential: true
     },
     {
         id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.representativeTelephone,
         inputType: INPUT_TYPE.CONTACT,
         label: '사업장 대표 연락처',
+        placeholder: '-없이 숫자만 입력해 주세요.',
         validator: validatePhoneNumber,
         essential: true
     },

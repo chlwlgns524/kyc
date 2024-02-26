@@ -17,7 +17,7 @@ export default function BusinessTypeUserInput({id, label, validator, essential, 
     };
 
     return (
-        <div className="item">
+        <div className="gridItem">
             <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
             <div className="userInputWrapper">
                 <div className={`userInput ${userInput !== '' && !valid ? "warningBox" : undefined}`}>
@@ -28,7 +28,7 @@ export default function BusinessTypeUserInput({id, label, validator, essential, 
                         value={userInput}
                         onChange={e => hanldeUserInput(e.target.value)}/>{userInput !== '' && !valid && <span>!</span>}
                 </div>
-                <span className={userInput === '' ? '' : (valid ? "confirm" : "warn")}>{userInput !== '' ? message : ''}</span>
+                <div className={`warningMessage ${userInput === '' ? '' : (valid ? "confirm" : "warn")}`}>{userInput !== '' ? message : ''}</div>
             </div>
         </div>
     )

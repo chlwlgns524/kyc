@@ -3,6 +3,7 @@ import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
 import {BUSINESS_DETAIL_DOMESTIC_FORM_ID, USER_INPUT_LIST} from "./business-detail-domestic-form.js";
 import UserInfoForm from "../../../common/UserInfoForm/UserInfoForm.jsx";
+import {Link} from "react-router-dom";
 
 export default function BusinessDetailDomesticForm() {
     const [user, setUser] = useState([
@@ -44,7 +45,11 @@ export default function BusinessDetailDomesticForm() {
         {
             id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.productType,
             validated: false,
-            value: ''
+            value: {
+                large: '',
+                middle: '',
+                small: ''
+            }
         },
         {
             id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.customerTransaction,
@@ -61,6 +66,11 @@ export default function BusinessDetailDomesticForm() {
                 currency: 'KRW',
                 value: '0',
             }
+        },
+        {
+            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.address,
+            validated: false,
+            value: ''
         },
         {
             id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.representativeTelephone,
@@ -97,11 +107,13 @@ export default function BusinessDetailDomesticForm() {
                     alert('임시저장');
                 }
                 }/>
-                <MainButton label={'다음'} onClick={() => {
-                    console.log(user, USER_INPUT_LIST);
+                <Link to={"/signup"}>
+                    <MainButton label={'다음'} onClick={() => {
+                        console.log(user, USER_INPUT_LIST);
                         alert('다음');
                     }
-                }/>
+                    }/>
+                </Link>
             </MainButtonContainer>
         </>
     )

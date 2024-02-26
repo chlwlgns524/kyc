@@ -29,6 +29,9 @@
     margin: 0;
     list-style: none;
 }
+button {
+    cursor: pointer;
+}
 input[type="text"],
 input[type="password"]{
     appearance: none;

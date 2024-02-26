@@ -2,7 +2,7 @@ import "./UserInput.css";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 
-export default function UserInput({id, label, referenceValue, validator, essential, pickUserInput}) {
+export default function UserInput({id, label, placeholder, referenceValue, validator, essential, pickUserInput}) {
     const [message, setMessage] = useState('');
     const [userInput, setUserInput] = useState('');
     const [valid, setValid] = useState(false);
@@ -22,18 +22,19 @@ export default function UserInput({id, label, referenceValue, validator, essenti
     }, [referenceValue]);
 
     return (
-        <div className="item">
+        <div className="gridItem">
             <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
             <div className="userInputWrapper">
                 <div className={`userInput ${userInput !== '' && !valid ? "warningBox" : undefined}`}>
                     <input
+                        placeholder={placeholder}
                         autoComplete="off"
                         type={`${isPasswordRelated(id) ? 'password' : 'text'}`}
                            id={id}
                            value={userInput}
                            onChange={e => hanldeUserInput(e.target.value)}/>{userInput !== '' && !valid && <span>!</span>}
                 </div>
-                <span className={userInput === '' ? '' : (valid ? "confirm" : "warn")}>{userInput !== '' ? message : ''}</span>
+                <div className={`warningMessage ${userInput === '' ? '' : (valid ? "confirm" : "warn")}`}>{userInput !== '' ? message : ''}</div>
             </div>
         </div>
     )
@@ -47,6 +48,7 @@ function isPasswordRelated(id) {
 UserInput.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
     referenceValue: PropTypes.string,
     validator: PropTypes.func.isRequired,
     essential: PropTypes.bool.isRequired,

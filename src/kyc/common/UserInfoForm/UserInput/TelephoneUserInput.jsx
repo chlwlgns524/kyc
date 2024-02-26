@@ -2,7 +2,7 @@ import "./UserInput.css";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 
-export default function TelephoneUserInput({id, label, validator, essential, pickUserInput}) {
+export default function TelephoneUserInput({id, label, placeholder, validator, essential, pickUserInput}) {
     const [message, setMessage] = useState('');
     const [frontNumber, setFrontNumber] = useState('');
     const [userInput, setUserInput] = useState('');
@@ -24,7 +24,7 @@ export default function TelephoneUserInput({id, label, validator, essential, pic
     }, [frontNumber]);
 
     return (
-        <div className="item">
+        <div className="gridItem">
             <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
             <div className="userInputWrapper">
                 <div className={`userInput ${userInput !== '' && !valid ? "warningBox" : ""}`}>
@@ -36,13 +36,14 @@ export default function TelephoneUserInput({id, label, validator, essential, pic
                         }
                     </select>
                     <input
+                        placeholder={placeholder}
                         autoComplete="off"
                         type='text'
                            id={id}
                            value={userInput}
                            onChange={e => hanldeUserInput(e.target.value)}/>{userInput !== '' && !valid && <span>!</span>}
                 </div>
-                <span className={userInput === '' ? '' : (valid ? "confirm" : "warn")}>{userInput !== '' ? message : ''}</span>
+                <div className={`warningMessage ${userInput === '' ? '' : (valid ? "confirm" : "warn")}`}>{userInput !== '' ? message : ''}</div>
             </div>
         </div>
     )
@@ -67,6 +68,7 @@ function getAppropriateFrontNumbers(id) {
 TelephoneUserInput.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
     validator: PropTypes.func.isRequired,
     essential: PropTypes.bool.isRequired,
     pickUserInput: PropTypes.func.isRequired

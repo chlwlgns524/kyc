@@ -30,7 +30,7 @@ export default function AmountUserInput({id, label, validator, essential, pickUs
     }
 
     return (
-        <div className="item">
+        <div className="gridItem">
             <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
             <div className="userInputWrapper">
                 <div className={`userInput ${!valid ? "warningBox" : ""}`}>
@@ -57,8 +57,7 @@ export default function AmountUserInput({id, label, validator, essential, pickUs
                         value={amount.value}
                         onChange={e => updateAmount(e.target.value)}/>{amount.value !== '' && !valid && <span>!</span>}
                 </div>
-                <span
-                    className={valid ? "confirm" : "warn"}>{message}</span>
+                <div className={`warningMessage ${valid ? "confirm" : "warn"}`}>{message}</div>
             </div>
         </div>
     )

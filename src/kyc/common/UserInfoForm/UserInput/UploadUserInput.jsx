@@ -1,13 +1,12 @@
 import "./UserInput.css";
 import styles from "./UploadUserInput.module.css";
 import PropTypes from "prop-types";
-import {useState} from "react";
 
 export default function UploadUserInput({id, label, essential, pickUserInput}) {
 
 
     return (
-        <div className="item">
+        <div className="gridItem">
             <label>{label} {essential ? <span className={styles.essential}>*</span> : undefined}</label>
             <div className={styles.uploadFileWrapper}>
                 <div className={styles.fileNameDisplay}>

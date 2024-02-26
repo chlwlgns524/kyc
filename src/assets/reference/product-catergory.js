@@ -1,4 +1,4 @@
-export const ProductCategory = {
+export const PRODUCT_CATEGORY = {
     large: {
         "의류, 잡화, 미용": {
             middle: {
@@ -116,7 +116,19 @@ export const ProductCategory = {
         },
         "유통, 전자상거래": {
             middle: {
-
+                "기타 미용": {
+                    small: {
+                        "미용실": {warning: false, prohibited: false},
+                        "이용원": {warning: false, prohibited: false},
+                        "피부미용실": {warning: false, prohibited: false},
+                        "체형관리": {warning: false, prohibited: false},
+                        "피부관리실": {warning: false, prohibited: false},
+                        "네일아트": {warning: false, prohibited: false},
+                        "발관리": {warning: false, prohibited: false},
+                        "이발소": {warning: false, prohibited: false},
+                        "헤어샵": {warning: false, prohibited: false},
+                    },
+                }
             }
         }
     },

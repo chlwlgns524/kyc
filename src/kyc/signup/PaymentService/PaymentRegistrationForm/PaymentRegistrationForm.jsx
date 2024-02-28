@@ -235,7 +235,7 @@ export default function PaymentRegistrationForm() {
                             <li>이용하실 서비스 정보 및 사업자 정보 입력이 완료되면 심사 및 심사 조건에 대한 안내 메일을 드립니다.</li>
                             <li>이어지는 페이지에서 사업자 정보를 모두 입력해주시기 바랍니다.</li>
                             <li>사용하시는 솔루션에 따라 당사 서비스 도입이 불가할 수 있습니다.</li>
-                            <li>www.eximbay.com > 기술지원 자료실 > 웹결제 모듈을 미리 확인해 주시기 바랍니다.</li>
+                            <li>www.eximbay.com {'>'} 기술지원 자료실 {'>'} 웹결제 모듈을 미리 확인해 주시기 바랍니다.</li>
                         </ul>
                         <div className={styles.agreement}>
                             {

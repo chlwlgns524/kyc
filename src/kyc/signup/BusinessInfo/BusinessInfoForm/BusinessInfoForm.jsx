@@ -1,6 +1,6 @@
 import styles from "./BusinessInfoForm.module.css";
 import MainForm from "../../../../components/MainForm/MainForm.jsx";
-import MainCheckBox from "../../../../components/MainCheckBox/MainCheckBox.jsx";
+import CircleCheckBox from "../../../../components/MainCheckBox/CircleCheckBox.jsx";
 import {useReducer} from "react";
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
@@ -38,7 +38,7 @@ export default function BusinessInfoForm() {
                         <p className={styles.itemTitle}>사업장 소재지를 선택해 주세요.</p>
                         <div className={styles.radioButtons}>
                             <div className={styles.radioButton}>
-                                <MainCheckBox
+                                <CircleCheckBox
                                     id={'domestic'}
                                     checked={state.businessLocation === 'domestic'}
                                     onChange={() => dispatch({type: 'SET_BUSINESS_LOCATION', payload: 'domestic'})}
@@ -46,7 +46,7 @@ export default function BusinessInfoForm() {
                                 <label htmlFor={'domestic'}>국내</label>
                             </div>
                             <div className={styles.radioButton}>
-                                <MainCheckBox
+                                <CircleCheckBox
                                     id={'abroad'}
                                     checked={state.businessLocation === 'abroad'}
                                     onChange={() => dispatch({type: 'SET_BUSINESS_LOCATION', payload: 'abroad'})}
@@ -61,7 +61,7 @@ export default function BusinessInfoForm() {
                         <p className={styles.itemTitle}>사업자 분류를 선택해 주세요.</p>
                         <div className={styles.radioButtons}>
                             <div className={styles.radioButton}>
-                                <MainCheckBox
+                                <CircleCheckBox
                                     id={'private'}
                                     checked={state.businessCategory === 'private'}
                                     onChange={() => dispatch({type: 'SET_BUSINESS_CATEGORY', payload: 'private'})}
@@ -69,7 +69,7 @@ export default function BusinessInfoForm() {
                                 <label htmlFor={'private'}>개인사업자</label>
                             </div>
                             <div className={styles.radioButton}>
-                                <MainCheckBox
+                                <CircleCheckBox
                                     id={'corporate'}
                                     checked={state.businessCategory === 'corporate'}
                                     onChange={() => dispatch({type: 'SET_BUSINESS_CATEGORY', payload: 'corporate'})}

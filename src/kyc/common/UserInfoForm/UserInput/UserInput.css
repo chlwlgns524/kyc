@@ -48,7 +48,7 @@
 .warningMessage {
     text-align: right;
     height: 1rem;
-    font-size: var(--subFontSize-1);
+    font-size: var(--subFontSize-2);
 }
 .essential,
 .confirm {

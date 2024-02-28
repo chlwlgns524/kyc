@@ -107,7 +107,7 @@ export default function BusinessDetailDomesticForm() {
                     alert('임시저장');
                 }
                 }/>
-                <Link to={"/signup"}>
+                <Link to={"/payment-service"}>
                     <MainButton label={'다음'} onClick={() => {
                         console.log(user, USER_INPUT_LIST);
                         alert('다음');

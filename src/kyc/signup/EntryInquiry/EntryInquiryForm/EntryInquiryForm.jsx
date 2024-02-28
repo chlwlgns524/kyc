@@ -1,5 +1,5 @@
 import styles from "./EntryInquiryForm.module.css";
-import MainCheckBox from "../../../../components/MainCheckBox/MainCheckBox.jsx";
+import CircleCheckBox from "../../../../components/MainCheckBox/CircleCheckBox.jsx";
 import {useState} from "react";
 import PropTypes from "prop-types";
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
@@ -22,14 +22,14 @@ export default function EntryInquiryForm({hostingList, buttonStyle}) {
         <MainForm title={"홈페이지 구축 방법을 선택해주세요"}>
             <ul className={styles.content}>
                 <li>
-                    <MainCheckBox
+                    <CircleCheckBox
                         id={'self'}
                         checked={hostingSite === 'self'}
                         onChange={() => setHostingSite('self')}/>
                     <label htmlFor="self">직접 구축</label> | <span className={styles.sub}>가맹점이 직접 홈페이지를 구축한 경우</span>
                 </li>
                 <li>
-                    <MainCheckBox
+                    <CircleCheckBox
                         checked={hostingSite !== 'self'}
                         onChange={() => setHostingSite(hostingList[0].name)}/>
                     호스팅사 이용 | <span className={styles.sub}>쇼핑몰 구축 서비스를 통해 가입하는 경우</span>

@@ -9,7 +9,7 @@
 }
 .category > span {
     flex: 1;
-    font-size: var(--subFontSize-1);
+    font-size: var(--subFontSize-2);
     color: var(--subFontColor)
 }
 .category > select {

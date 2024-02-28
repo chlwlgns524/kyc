@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: var(--subFontSize-1);
+    font-size: var(--subFontSize-2);
 }
 .fileNameDisplay {
     border: 1px solid var(--disabledColor-100);

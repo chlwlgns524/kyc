@@ -8,6 +8,7 @@ import CategoryUserInput from "./UserInput/CategoryUserInput.jsx";
 import AmountUserInput from "./UserInput/AmountUserInput.jsx";
 import {INPUT_TYPE} from "./input-type.js";
 import AddressUserInput from "./UserInput/AddressUserInput.jsx";
+import EmailAuthUserInput from "./UserInput/EmailAuthUserInput.jsx";
 
 export default function UserInfoForm({title, description, referenceValue, userInputList, pickUserInput}) {
     console.log("<UserInfoForm/> rendered!");
@@ -77,6 +78,15 @@ export default function UserInfoForm({title, description, referenceValue, userIn
                                     essential={userInput.essential}
                                     pickUserInput={pickUserInput}
                                 />
+                            case INPUT_TYPE.EMAIL_AUTH:
+                                return <EmailAuthUserInput
+                                    key={userInput.id}
+                                    id={userInput.id}
+                                    label={userInput.label}
+                                    validator={userInput.validator}
+                                    essential={userInput.essential}
+                                    pickUserInput={pickUserInput}
+                                    />
                             default:
                                 return <div key={index}></div>
                         }

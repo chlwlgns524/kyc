@@ -99,10 +99,11 @@ export default function BusinessDetailDomesticForm() {
                 pickUserInput={pickUserInput}
             />
             <MainButtonContainer>
-                <MainButton label={'이전'} onClick={() => {
-                    alert('이전');
-                }
-                }/>
+                <Link to={"/business-info"}>
+                    <MainButton label={'이전'} onClick={() => {
+                        alert('이전');
+                    }}/>
+                </Link>
                 <MainButton label={'임시저장'} onClick={() => {
                     alert('임시저장');
                 }
@@ -111,8 +112,7 @@ export default function BusinessDetailDomesticForm() {
                     <MainButton label={'다음'} onClick={() => {
                         console.log(user, USER_INPUT_LIST);
                         alert('다음');
-                    }
-                    }/>
+                    }}/>
                 </Link>
             </MainButtonContainer>
         </>

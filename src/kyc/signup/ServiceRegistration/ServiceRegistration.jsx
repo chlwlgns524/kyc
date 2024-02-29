@@ -8,7 +8,7 @@ export default function ServiceRegistration() {
         <BasicLayout
             Header={() => <BasicHeader
                 title={"온라인 결제서비스 회원가입"}
-                diagram={() => <StateTransitionDiagram current={'1'}/>}
+                diagram={() => <StateTransitionDiagram current={'4'}/>}
             />}
             Body={() => <ServiceRegistrationForm/>}
         />

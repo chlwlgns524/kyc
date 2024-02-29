@@ -42,7 +42,7 @@
     background-color: #faf8f8;
     margin: 2rem;
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 .productDescription {
 
@@ -51,7 +51,7 @@
     border: 1px solid black;
     margin: 2rem;
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 20px;
     line-height: 1rem;
     height: 10rem;
 }

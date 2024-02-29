@@ -5,5 +5,6 @@ export const INPUT_TYPE = {
     CATEGORY: Symbol('category'),
     AMOUNT: Symbol('amount'),
     BASIC: Symbol('basic'),
+    EMAIL_AUTH: Symbol('emailAuth'),
     EMPTY: Symbol('')
 }

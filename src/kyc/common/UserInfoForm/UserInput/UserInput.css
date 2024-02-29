@@ -19,7 +19,7 @@
 }
 .userInput {
     border: 1px solid var(--disabledColor-100);
-    padding: .35rem 1rem;
+    padding: .35rem .5rem;
     height: 2rem;
     border-radius: 5px;
     display: flex;
@@ -37,13 +37,13 @@
     flex: 9;
 }
 .userInput > span {
-    border: 2px solid red;
+    border: 1px solid red;
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: red;
     border-radius: 50%;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
 }
 .warningMessage {
     text-align: right;

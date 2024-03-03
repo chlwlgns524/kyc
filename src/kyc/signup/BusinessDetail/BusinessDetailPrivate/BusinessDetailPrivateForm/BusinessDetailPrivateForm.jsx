@@ -1,49 +1,49 @@
 import {useState} from "react";
-import MainButton from "../../../../components/MainButton/MainButton.jsx";
-import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
-import {BUSINESS_DETAIL_DOMESTIC_FORM_ID, USER_INPUT_LIST} from "./business-detail-domestic-form.js";
-import UserInfoForm from "../../../common/UserInfoForm/UserInfoForm.jsx";
+import MainButton from "../../../../../components/MainButton/MainButton.jsx";
+import MainButtonContainer from "../../../../../components/MainButton/MainButtonContainer.jsx";
+import {BUSINESS_DETAIL_PRIVATE_FORM_ID, USER_INPUT_LIST} from "./business-detail-private-form.js";
+import UserInfoForm from "../../../../common/UserInfoForm/UserInfoForm.jsx";
 import {Link} from "react-router-dom";
 
-export default function BusinessDetailDomesticForm() {
+export default function BusinessDetailPrivateForm() {
     const [user, setUser] = useState([
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.businessLicese,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.businessLicense,
             validated: true,
             value: ''
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.businessNumber,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.businessNumber,
             validated: false,
             value: ''
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.companyKrName,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.companyKrName,
             validated: false,
             value: ''
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.companyEnName,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.companyEnName,
             validated: false,
             value: ''
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.homepageUrl,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.homepageUrl,
             validated: false,
             value: '',
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.businessType,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.businessType,
             validated: false,
             value: '',
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.industry,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.industry,
             validated: false,
             value: ''
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.productType,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.productType,
             validated: false,
             value: {
                 large: '',
@@ -52,7 +52,7 @@ export default function BusinessDetailDomesticForm() {
             }
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.customerTransaction,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.customerTransaction,
             validated: false,
             value: {
                 currency: 'KRW',
@@ -60,7 +60,7 @@ export default function BusinessDetailDomesticForm() {
             }
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.estimatedVolumePerMonth,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.estimatedVolumePerMonth,
             validated: false,
             value: {
                 currency: 'KRW',
@@ -68,17 +68,23 @@ export default function BusinessDetailDomesticForm() {
             }
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.address,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.address,
+            validated: false,
+            value: {
+                country: 'kr',
+                zonecode: '',
+                addressKr: '',
+                additionalAddress: '',
+                addressEn: '',
+            }
+        },
+        {
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.representativeTelephone,
             validated: false,
             value: ''
         },
         {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.representativeTelephone,
-            validated: false,
-            value: ''
-        },
-        {
-            id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.representativeEmail,
+            id: BUSINESS_DETAIL_PRIVATE_FORM_ID.representativeEmail,
             validated: false,
             value: ''
         }

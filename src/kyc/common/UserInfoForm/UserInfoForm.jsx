@@ -9,10 +9,12 @@ import AmountUserInput from "./UserInput/AmountUserInput.jsx";
 import {INPUT_TYPE} from "./input-type.js";
 import AddressUserInput from "./UserInput/AddressUserInput.jsx";
 import EmailAuthUserInput from "./UserInput/EmailAuthUserInput.jsx";
+import {useContext} from "react";
+import CorporateUserContext from "../../signup/BusinessDetail/BusinessDetailCorporate/corporate-user-store.js";
 
-export default function UserInfoForm({title, description, referenceValue, userInputList, pickUserInput}) {
+export default function UserInfoForm({title, description, referenceValue, userInputList}) {
     console.log("<UserInfoForm/> rendered!");
-
+    const {user, setUser, pickUserInput} = useContext(CorporateUserContext);
     return (
         <MainForm
             title={title}
@@ -100,7 +102,7 @@ export default function UserInfoForm({title, description, referenceValue, userIn
 UserInfoForm.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
-    referenceValue: PropTypes.string,
+    referenceValue: PropTypes.node,
     userInputList: PropTypes.array.isRequired,
-    pickUserInput: PropTypes.func.isRequired,
+    // pickUserInput: PropTypes.func.isRequired,
 }

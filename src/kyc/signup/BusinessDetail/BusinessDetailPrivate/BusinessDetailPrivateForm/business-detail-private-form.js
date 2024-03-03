@@ -1,17 +1,17 @@
-import validateId from "../../../common/UserInfoForm/UserInput/Validator/idValidator.js";
-import validateCompany, {validateCompanyEn} from "../../../common/UserInfoForm/UserInput/Validator/companyNameValidator.js";
-import validatePhoneNumber from "../../../common/UserInfoForm/UserInput/Validator/managerPhoneNumberValidator.js";
-import validateManagerEmail from "../../../common/UserInfoForm/UserInput/Validator/managerEmailValidator.js";
-import {INPUT_TYPE} from "../../../common/UserInfoForm/input-type.js";
-import {validateBusinessNumber} from "../../../common/UserInfoForm/UserInput/Validator/businessNumberValidator.js";
-import {validateBusinessType} from "../../../common/UserInfoForm/UserInput/Validator/businessTypeValidator.js";
-import {validateIndustry} from "../../../common/UserInfoForm/UserInput/Validator/industryValidator.js";
-import {validateAmount} from "../../../common/UserInfoForm/UserInput/Validator/amountValidator.js";
-import {validateCategory} from "../../../common/UserInfoForm/UserInput/Validator/categoryValidator.js";
-import {validateAddress} from "../../../common/UserInfoForm/UserInput/Validator/addressValidator.js";
+import validateId from "../../../../common/UserInfoForm/UserInput/Validator/idValidator.js";
+import validateCompany, {validateCompanyEn} from "../../../../common/UserInfoForm/UserInput/Validator/companyNameValidator.js";
+import validatePhoneNumber from "../../../../common/UserInfoForm/UserInput/Validator/managerPhoneNumberValidator.js";
+import validateManagerEmail from "../../../../common/UserInfoForm/UserInput/Validator/managerEmailValidator.js";
+import {INPUT_TYPE} from "../../../../common/UserInfoForm/input-type.js";
+import {validateBusinessNumber} from "../../../../common/UserInfoForm/UserInput/Validator/businessNumberValidator.js";
+import {validateBusinessType} from "../../../../common/UserInfoForm/UserInput/Validator/businessTypeValidator.js";
+import {validateIndustry} from "../../../../common/UserInfoForm/UserInput/Validator/industryValidator.js";
+import {validateAmount} from "../../../../common/UserInfoForm/UserInput/Validator/amountValidator.js";
+import {validateCategory} from "../../../../common/UserInfoForm/UserInput/Validator/categoryValidator.js";
+import {validateAddress} from "../../../../common/UserInfoForm/UserInput/Validator/addressValidator.js";
 
-export const BUSINESS_DETAIL_DOMESTIC_FORM_ID = {
-    businessLicese: 'businessLicese',
+export const BUSINESS_DETAIL_PRIVATE_FORM_ID = {
+    businessLicense: 'businessLicese',
     businessNumber: 'businessNumber',
     companyKrName: 'companyKrName',
     companyEnName: 'companyEnName',
@@ -28,13 +28,13 @@ export const BUSINESS_DETAIL_DOMESTIC_FORM_ID = {
 
 export const USER_INPUT_LIST = [
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.businessLicese,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.businessLicense,
         inputType: INPUT_TYPE.UPLOAD,
         label: '사업자등록증',
         essential: false,
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.businessNumber,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.businessNumber,
         inputType: INPUT_TYPE.BASIC,
         label: '사업자등록번호',
         placeholder: '-를 포함해서 입력해주세요.',
@@ -42,21 +42,21 @@ export const USER_INPUT_LIST = [
         essential: true,
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.companyKrName,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.companyKrName,
         inputType: INPUT_TYPE.BASIC,
         label: '회사명',
         validator: validateCompany,
         essential: true
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.companyEnName,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.companyEnName,
         inputType: INPUT_TYPE.BASIC,
         label: '회사명(영문)',
         validator: validateCompanyEn,
         essential: true,
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.homepageUrl,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.homepageUrl,
         inputType: INPUT_TYPE.BASIC,
         label: '홈페이지 주소',
         validator: validateId,
@@ -67,28 +67,28 @@ export const USER_INPUT_LIST = [
         inputType: '',
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.businessType,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.businessType,
         inputType: INPUT_TYPE.BASIC,
         label: '업태',
         validator: validateBusinessType,
         essential: true
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.industry,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.industry,
         inputType: INPUT_TYPE.BASIC,
         label: '종목',
         validator: validateIndustry,
         essential: true
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.productType,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.productType,
         inputType: INPUT_TYPE.CATEGORY,
         label: '판매 상품의 종류',
         validator: validateCategory,
         essential: true
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.customerTransaction,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.customerTransaction,
         inputType: INPUT_TYPE.AMOUNT,
         label: '객단가',
         validator: validateAmount,
@@ -99,21 +99,21 @@ export const USER_INPUT_LIST = [
         inputType: ''
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.estimatedVolumePerMonth,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.estimatedVolumePerMonth,
         inputType: INPUT_TYPE.AMOUNT,
         label: '월 예상 볼륨',
         validator: validateAmount,
         essential: true
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.address,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.address,
         inputType: INPUT_TYPE.ADDRESS,
         label: '사업장 주소',
         validator: validateAddress,
         essential: true
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.representativeTelephone,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.representativeTelephone,
         inputType: INPUT_TYPE.CONTACT,
         label: '사업장 대표 연락처',
         placeholder: '-없이 숫자만 입력해 주세요.',
@@ -121,7 +121,7 @@ export const USER_INPUT_LIST = [
         essential: true
     },
     {
-        id: BUSINESS_DETAIL_DOMESTIC_FORM_ID.representativeEmail,
+        id: BUSINESS_DETAIL_PRIVATE_FORM_ID.representativeEmail,
         inputType: INPUT_TYPE.BASIC,
         label: '사업장 대표 이메일',
         validator: validateManagerEmail,

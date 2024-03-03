@@ -13,7 +13,6 @@ export default function AddressUserInput({id, label, validator, essential, pickU
         addressKr: '',
         additionalAddress: '',
         addressEn: '',
-
     });
     const [valid, setValid] = useState(false);
     const validateAddress = updatedAddress => {

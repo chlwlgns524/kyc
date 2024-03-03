@@ -1,4 +1,3 @@
-import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {Link} from "react-router-dom";
 import styles from "./PaymentServiceCompleteContent.module.css";

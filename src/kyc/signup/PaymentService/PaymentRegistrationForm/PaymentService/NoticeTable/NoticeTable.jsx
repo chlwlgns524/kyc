@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import {ContentBox} from "../../../../../../components/ContentBox/ContentBox.jsx";
 
 const FlexContainer = styled.div`
-    border-top: 1px solid black;
-    margin: 0 5rem;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
     display: flex;
     flex-direction: column;
 `;
@@ -20,6 +21,8 @@ const FlexItem = styled.div`
     justify-content: center;
 `;
 
+import styles from "./NoticeTable.module.css";
+
 export default function NoticeTable() {
     const flex3 = {
         flex: '3'
@@ -28,8 +31,8 @@ export default function NoticeTable() {
         textAlign: 'left'
     }
     return (
-        <>
-            <div>
+        <ContentBox>
+            <div className={styles.heading}>
                 <h1>금지/유의 업종 지정</h1>
                 <p>금지/유의 업종</p>
             </div>
@@ -170,6 +173,6 @@ export default function NoticeTable() {
                     </FlexItem>
                 </FlexRow>
             </FlexContainer>
-        </>
+        </ContentBox>
     )
 }

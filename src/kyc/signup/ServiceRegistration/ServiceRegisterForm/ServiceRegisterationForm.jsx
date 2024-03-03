@@ -142,7 +142,7 @@ export default function ServiceRegisterationForm() {
         },
         {
             id: 'managerEmail',
-            inputType: INPUT_TYPE.BASIC,
+            inputType: INPUT_TYPE.EMAIL_AUTH,
             label: '운영담당자 이메일',
             validator: validateManagerEmail,
             essential: true,

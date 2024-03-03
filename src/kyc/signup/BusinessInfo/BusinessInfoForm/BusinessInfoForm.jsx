@@ -81,7 +81,10 @@ export default function BusinessInfoForm() {
                 </li>
             </ul>
             <MainButtonContainer>
-                <Link to={'/business-info-domestic'}><MainButton label={'다음'}/></Link>
+                <Link
+                    to={`/business-detail/${state.businessCategory}`}>
+                    <MainButton label={'다음'}/>
+                </Link>
             </MainButtonContainer>
         </MainForm>
     )

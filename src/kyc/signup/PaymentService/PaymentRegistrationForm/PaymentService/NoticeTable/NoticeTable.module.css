@@ -1,0 +1,6 @@
+.heading {
+    margin-bottom: 1rem;
+}
+.heading > * {
+    margin-top: 3rem;
+}

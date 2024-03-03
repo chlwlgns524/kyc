@@ -1,7 +1,8 @@
 .matrix {
+    /*border: 1px dashed black;*/
     margin: 1rem 0;
-    padding: 2rem;
+    padding: 1rem;
     display: grid;
     grid-template-columns: repeat(2, minmax(200px, 1fr));
-    gap: 2rem;
+    /*gap: 1rem;*/
 }

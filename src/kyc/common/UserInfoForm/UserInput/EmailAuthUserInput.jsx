@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 import styles from "./EmailAuthUserInput.module.css";
+import commonStyles from "./UserInput.module.css";
 import axios from "axios";
+import {formatSecondsToStandardTime, generateAuthNumber} from "../../../../utils/utils.js";
 
-const TIME_LIMIT_IN_SECONDS = 30;
+const TIME_LIMIT_IN_SECONDS = 180;
+const MAXIMUM_LENGTH_OF_AUTH_NUMBER = 6;
 
 export default function EmailAuthUserInput({id, label, placeholder, validator, essential, pickUserInput}) {
     const [message, setMessage] = useState('');
@@ -17,7 +20,7 @@ export default function EmailAuthUserInput({id, label, placeholder, validator, e
         const validation = validator(updatedValue);
         setValid(validation.result);
         setMessage(validation.message);
-        pickUserInput(id, validation.result, updatedValue);
+        pickUserInput(id, validation.result && isAuthenticated, updatedValue);
     };
 
     const startAuth = async () => {
@@ -28,15 +31,15 @@ export default function EmailAuthUserInput({id, label, placeholder, validator, e
         setIsActive(true);
         setSeconds(TIME_LIMIT_IN_SECONDS);
 
-        const newAuthNumber = generateAuthNumber();
+        const newAuthNumber = generateAuthNumber(MAXIMUM_LENGTH_OF_AUTH_NUMBER);
         setAuthNumber(newAuthNumber);
-
+        //idkd uyfk ueat zfoo
         try {
             const response = await axios.post('http://localhost:3001/send-email',
-                {
-                    email: emailInput,
-                    authNumber: newAuthNumber
-                }
+                    {
+                        to: emailInput,
+                        authNumber: newAuthNumber
+                    }
             );
             console.log(response.data);
         } catch (e) {
@@ -49,81 +52,85 @@ export default function EmailAuthUserInput({id, label, placeholder, validator, e
     const [authNumber, setAuthNumber] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+    const authenticate = () => {
+        console.log(authNumber);
+        if (authInput === authNumber) {
+            setIsAuthenticated(true);
+            pickUserInput(id, true, emailInput);
+        }
+        else
+            alert('인증번호가 맞지 않습니다.');
+    }
+
     useEffect(() => {
-        let interval;
+        let timer;
         if (isActive && seconds > 0) {
-            interval = setInterval(() => setSeconds(prevState => prevState - 1), 1000);
+            timer = setInterval(() => setSeconds(prevState => prevState - 1), 1000);
         } else if (seconds === 0) {
             setIsActive(false);
             setSeconds(TIME_LIMIT_IN_SECONDS);
         }
-        return () => clearInterval(interval);
+        return () => clearInterval(timer);
     }, [seconds, isActive]);
     return (
-        <div className="gridItem">
-            <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
-            <div className={styles.authContainer}>
-                <div className={styles.emailInput}>
-                    <div className={`flex3`}>
-                        <div className={`userInput ${emailInput !== '' && !valid ? "warningBox" : undefined}`}>
-                            <input
-                                placeholder={placeholder}
-                                autoComplete="off"
-                                type="text"
-                                id={id}
-                                value={emailInput}
-                                readOnly={isAuthenticated}
-                                onChange={e => handleEmailInput(e.target.value)}/>{emailInput !== '' && !valid &&
-                            <span>!</span>}
-                        </div>
-                    </div>
-                    {
-                        <button
-                            className={`flex1`}
-                            disabled={isAuthenticated}
-                            onClick={startAuth}
-                        >{(isActive || isAuthenticated) ? '재발송' : '이메일인증'}</button>
-                    }
-                </div>
-                {
-                    (isActive || isAuthenticated) &&
-                    <div className={styles.emailInput}>
-                        <div className={`flex3`}>
-                            <div className={`${styles.userInput}`}>
+            <div className={`${commonStyles.gridItem}`}>
+                <label htmlFor={id}>{label} {essential ?
+                        <span className={`${commonStyles.essential}`}>*</span> : undefined}</label>
+                <div className={styles.authContainer}>
+                    <div className={`${styles.container}`}>
+                        <div className={`${styles.item} ${styles.input}`}>
+                            <div className={`${styles.inputWrapper} ${emailInput !== '' && !valid ? commonStyles.warningBox : undefined}`}>
                                 <input
-                                    placeholder={placeholder}
-                                    autoComplete="off"
-                                    type="text"
-                                    id={id}
-                                    value={authInput}
-                                    readOnly={isAuthenticated}
-                                    onChange={e => setAuthInput(e.target.value)}/>
-                                <div>{!isAuthenticated && seconds}</div>
+                                        className={`${styles.input}`}
+                                        placeholder={placeholder}
+                                        autoComplete="off"
+                                        type="text"
+                                        id={id}
+                                        value={emailInput}
+                                        disabled={isAuthenticated}
+                                        onChange={e => handleEmailInput(isAuthenticated ? emailInput : e.target.value)}/>
+                                <span className={`${styles.span} ${emailInput !== '' && !valid ? commonStyles.warningBox : undefined}`}>!</span>
                             </div>
                         </div>
                         <button
-                            className={`flex1`}
-                            disabled={isAuthenticated}
-                            onClick={() => {
-                                console.log(authInput);
-                                if (authInput === authNumber)
-                                    setIsAuthenticated(true);
-                            }}
-                        >{isAuthenticated ? '인증완료' : '확인'}</button>
+                                className={`${styles.item} ${styles.button} ${isAuthenticated ? styles.disabled : undefined}`}
+                                onClick={startAuth}
+                                disabled={isAuthenticated}
+                        >
+                            {isActive ? '재발송' : '이메일인증'}
+                        </button>
                     </div>
-                }
-                <div
-                    className={`warningMessage ${emailInput === '' ? '' : (valid ? "confirm" : "warn")}`}>{emailInput !== '' ? message : ''}</div>
+                    {
+                            (isActive && seconds > 0) || isAuthenticated ?
+                        <div className={`${styles.container}`}>
+                            <div className={`${styles.item} ${styles.input}`}>
+                                <div className={`${styles.inputWrapper}`}>
+                                    <input
+                                            className={`${styles.input}`}
+                                            placeholder={placeholder}
+                                            autoComplete="off"
+                                            type="text"
+                                            id={id}
+                                            value={authInput}
+                                            disabled={isAuthenticated}
+                                            maxLength={MAXIMUM_LENGTH_OF_AUTH_NUMBER}
+                                            onChange={e => setAuthInput(e.target.value)}/>
+                                    <span className={`${styles.span} ${styles.time}`}>{!isAuthenticated && formatSecondsToStandardTime(seconds)}</span>
+                                </div>
+                            </div>
+                            <button
+                                    className={`${styles.item} ${styles.button} ${isAuthenticated ? styles.disabled : undefined}`}
+                                    onClick={authenticate}
+                                    disabled={isAuthenticated}
+                            >
+                                {isAuthenticated ? '인증완료' : '확인'}
+                            </button>
+                        </div> : ''
+                    }
+                    <div className={`${commonStyles.warningMessage} ${emailInput === '' ? '' : (valid ? commonStyles.confirm : commonStyles.warn)}`}>{emailInput !== '' ? message : ''}</div>
+                </div>
             </div>
-        </div>
     )
-}
-
-function generateAuthNumber() {
-    const randomNumbers = [];
-    for (let i = 0; i < 6; i++)
-        randomNumbers.push(Math.floor(Math.random() * 10));
-    return randomNumbers.join('');
 }
 
 EmailAuthUserInput.propTypes = {

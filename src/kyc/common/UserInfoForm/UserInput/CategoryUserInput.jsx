@@ -1,4 +1,4 @@
-import "./UserInput.css";
+import commonStyles from "./UserInput.module.css";
 import styles from "./CategoryUserInput.module.css";
 import PropTypes from "prop-types";
 import {useState} from "react";
@@ -40,9 +40,9 @@ export default function CategoryUserInput({id, label, validator, essential, pick
     };
 
     return (
-        <div className="gridItem">
-            <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
-            <div className={`userInputWrapper ${styles.categoryWrapper}`}>
+        <div className={`${commonStyles.gridItem}`}>
+            <label htmlFor={id}>{label} {essential ? <span className={`${commonStyles.essential}`}>*</span> : undefined}</label>
+            <div className={`${commonStyles.userInputWrapper} ${styles.categoryWrapper}`}>
                 <div className={`${styles.category}`}>
                     <span>대분류</span>
                     <select
@@ -79,7 +79,7 @@ export default function CategoryUserInput({id, label, validator, essential, pick
                         }
                     </select>
                 </div>
-                <div className={`warningMessage ${!updated ? '' : (valid ? "confirm" : "warn")}`}>{cateogry.large !== '' ? message : ''}</div>
+                <div className={`${commonStyles.warningBox} ${!updated ? '' : (valid ? commonStyles.confirm : commonStyles.warn)}`}>{cateogry.large !== '' ? message : ''}</div>
             </div>
         </div>
     )

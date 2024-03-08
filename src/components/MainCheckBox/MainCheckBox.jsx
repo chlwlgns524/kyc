@@ -10,14 +10,14 @@ export const MainCheckBox = styled.input.attrs({type: 'checkbox'})`
     width: ${props => props.width || '20px'};
     height: ${props => props.height || '20px'};
     cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 
     &:before {
         content: '\\2713';
         font-size: 20px;
         color: gray;
-        position: relative;
-        left: 20%;
-        bottom: 20%;
     }
 
     &:checked {

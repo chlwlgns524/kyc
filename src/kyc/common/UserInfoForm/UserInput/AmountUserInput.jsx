@@ -1,4 +1,4 @@
-import "./UserInput.css"
+import commonStyles from "./UserInput.module.css";
 import {useState} from "react";
 import PropTypes from "prop-types";
 import styles from "./AmountUserInput.module.css";
@@ -30,10 +30,10 @@ export default function AmountUserInput({id, label, validator, essential, pickUs
     }
 
     return (
-        <div className="gridItem">
-            <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
-            <div className="userInputWrapper">
-                <div className={`userInput ${!valid ? "warningBox" : ""}`}>
+        <div className={`${commonStyles.gridItem}`}>
+            <label htmlFor={id}>{label} {essential ? <span className={`${commonStyles.essential}`}>*</span> : undefined}</label>
+            <div className={`${commonStyles.userInputWrapper}`}>
+                <div className={`${commonStyles.userInput} ${!valid ? commonStyles.warningBox : ""}`}>
                     <select
                         value={amount.currency}
                         onChange={e => updateCurrency(e.target.value)}
@@ -55,9 +55,10 @@ export default function AmountUserInput({id, label, validator, essential, pickUs
                         type='text'
                         id={id}
                         value={amount.value}
-                        onChange={e => updateAmount(e.target.value)}/>{amount.value !== '' && !valid && <span>!</span>}
+                        onChange={e => updateAmount(e.target.value)}/>
+                    <span className={amount.value !== '' && !valid ? commonStyles.warningBox : undefined}>!</span>
                 </div>
-                <div className={`warningMessage ${valid ? "confirm" : "warn"}`}>{message}</div>
+                <div className={`${commonStyles.warningMessage} ${valid ? commonStyles.confirm : commonStyles.warn}`}>{message}</div>
             </div>
         </div>
     )

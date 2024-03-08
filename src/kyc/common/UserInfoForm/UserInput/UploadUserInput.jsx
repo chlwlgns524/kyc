@@ -1,4 +1,4 @@
-import "./UserInput.css";
+import commonStyles from "./UserInput.module.css";
 import styles from "./UploadUserInput.module.css";
 import PropTypes from "prop-types";
 
@@ -6,7 +6,7 @@ export default function UploadUserInput({id, label, essential, pickUserInput}) {
 
 
     return (
-        <div className="gridItem">
+        <div className={`${commonStyles.gridItem}`}>
             <label>{label} {essential ? <span className={styles.essential}>*</span> : undefined}</label>
             <div className={styles.uploadFileWrapper}>
                 <div className={styles.fileNameDisplay}>

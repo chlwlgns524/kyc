@@ -1,4 +1,3 @@
-import styles from './ServiceRegisterationForm.module.css';
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {Fragment, useState} from "react";
 import validateId from "../../../common/UserInfoForm/UserInput/Validator/idValidator.js";
@@ -164,16 +163,16 @@ export default function ServiceRegisterationForm() {
     ];
 
     const pickUserInput = (id, validated, value) => {
-        const updatedUser = user.map(info =>
-            info.id === id ? {...info, validated: validated, value: value} : info);
-        setUser(updatedUser);
-    }
+        setUser(prevUser =>
+                prevUser.map(userDetail => (userDetail.id === id ? {...userDetail, validated, value} : userDetail))
+        );
+    };
 
     const currentPassword = getCurrentPassword(user);
     const navigate = useNavigate();
 
     return (
-        <section className={styles.container}>
+        <>
             <Agreement
                 agreementChecked={agreementCheckedList}
                 setAgreementChecked={setAgreementCheckedList}
@@ -188,14 +187,15 @@ export default function ServiceRegisterationForm() {
              />
             <MainButtonContainer>
                 <MainButton label={'회원가입'} onClick={() => {
+                    console.log(agreementCheckedList);
+                    user.forEach(info => console.log(info));
                     if (checkAgreementCheckList(agreementCheckedList) && checkUserInfo(user)) {
                         alert('회원가입 성공!');
-                        console.log(agreementCheckedList, user);
                         navigate('/business-info');
                     }
                 }}/>
             </MainButtonContainer>
-        </section>
+        </>
     )
 }
 

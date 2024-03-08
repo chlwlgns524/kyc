@@ -1,5 +1,5 @@
+import commonStyles from "./UserInput.module.css";
 import styles from "./AddressUserInput.module.css";
-import "./UserInput.css";
 import PropTypes from "prop-types";
 import {useState} from "react";
 import InputModal from "../../../../components/Modal/InputModal.jsx";
@@ -46,8 +46,8 @@ export default function AddressUserInput({id, label, validator, essential, pickU
         validateAddress(updatedAddress);
     }
     return (
-        <div className="gridItem span2">
-            <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
+        <div className={`${commonStyles.gridItem} ${commonStyles.span2}`}>
+            <label htmlFor={id}>{label} {essential ? <span className={commonStyles.essential}>*</span> : undefined}</label>
             <div className={`${styles.postcodeOuterWrapper}`}>
                 {
                     isModalOpen &&
@@ -61,7 +61,7 @@ export default function AddressUserInput({id, label, validator, essential, pickU
                     </select>
                     <input type="text" className={styles.zonecode} value={address.zonecode} readOnly={true}/>
                     <input type="text" className={styles.addressKr} value={address.addressKr} readOnly={true}/>
-                    <div className={`userInput ${styles.remaningAddress} ${address.zonecode !== '' && address.additionalAddress === '' && !valid ? styles.warningBox : undefined}`}>
+                    <div className={`${commonStyles.userInput} ${styles.remaningAddress} ${address.zonecode !== '' && address.additionalAddress === '' && !valid ? styles.warningBox : undefined}`}>
                         <input type="text" disabled={address.zonecode === ''} onChange={handleUserInput}/>
                     </div>
                     <button
@@ -72,7 +72,7 @@ export default function AddressUserInput({id, label, validator, essential, pickU
                     </button>
                 </div>
                 <input type="text" className={styles.addressEn} value={address.addressEn} readOnly={true}/>
-                <div className={`warningMessage ${valid ? "confirm" : "warn"}`}>{address.zonecode !== '' ? message : ''}</div>
+                <div className={`${commonStyles.warningMessage} ${valid ? commonStyles.confirm : commonStyles.warn}`}>{address.zonecode !== '' ? message : ''}</div>
             </div>
         </div>
     )

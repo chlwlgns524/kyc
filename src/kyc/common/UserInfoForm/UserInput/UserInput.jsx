@@ -1,4 +1,4 @@
-import "./UserInput.css";
+import commonStyles from "./UserInput.module.css";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 
@@ -22,19 +22,20 @@ export default function UserInput({id, label, placeholder, referenceValue, valid
     }, [referenceValue]);
 
     return (
-        <div className="gridItem">
-            <label htmlFor={id}>{label} {essential ? <span className="essential">*</span> : undefined}</label>
-            <div className="userInputWrapper">
-                <div className={`userInput ${userInput !== '' && !valid ? "warningBox" : undefined}`}>
+        <div className={`${commonStyles.gridItem}`}>
+            <label htmlFor={id}>{label} {essential ? <span className={`${commonStyles.essential}`}>*</span> : undefined}</label>
+            <div className={`${commonStyles.userInputWrapper}`}>
+                <div className={`${commonStyles.userInput} ${userInput !== '' && !valid ? commonStyles.warningBox : undefined}`}>
                     <input
                         placeholder={placeholder}
                         autoComplete="off"
                         type={`${isPasswordRelated(id) ? 'password' : 'text'}`}
                            id={id}
                            value={userInput}
-                           onChange={e => hanldeUserInput(e.target.value)}/>{userInput !== '' && !valid && <span>!</span>}
+                           onChange={e => hanldeUserInput(e.target.value)}/>
+                    <span className={userInput !== '' && !valid ? commonStyles.warningBox : undefined}>!</span>
                 </div>
-                <div className={`warningMessage ${userInput === '' ? '' : (valid ? "confirm" : "warn")}`}>{userInput !== '' ? message : ''}</div>
+                <div className={`${commonStyles.warningMessage} ${userInput === '' ? '' : (valid ? commonStyles.confirm : commonStyles.warn)}`}>{userInput !== '' ? message : ''}</div>
             </div>
         </div>
     )

@@ -36,7 +36,10 @@
     justify-content: space-between;
     align-items: center;
 }
-.paymentMethod {
+.countryListContainer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 4개의 동일한 너비의 열 */
+    grid-gap: 10px; /* 그리드 아이템 사이의 간격 */
 }
 .paymentMethodInnerWrapper {
     background-color: #faf8f8;
@@ -44,7 +47,7 @@
     padding: 2rem;
     border-radius: 20px;
 }
-.productDescription {
+.paymentMethod {
 
 }
 .description {
@@ -54,9 +57,6 @@
     border-radius: 20px;
     line-height: 1rem;
     height: 10rem;
-}
-.serviceTarget {
-
 }
 .notice {
     width: 80%;
@@ -91,4 +91,10 @@
     font-size: 1.25rem;
     width: 100%;
     font-weight: bold;
+}
+.productDescription {
+
+}
+.serviceTarget {
+
 }

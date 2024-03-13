@@ -1,4 +1,4 @@
-import commonStyles from "./UserInput.module.css";
+import commonStyles from "./BasicUserInput.module.css";
 import PropTypes from "prop-types";
 import {useState} from "react";
 

@@ -5,7 +5,7 @@ import {useState} from "react";
 import PropTypes from "prop-types";
 
 export default function Agreement({agreementChecked, setAgreementChecked, agreementDetails}) {
-    console.log("<Agreement/> rendered!");
+    // console.log("<Agreement/> rendered!");
 
     const [detailShown, setDetailShown] = useState(initDetailShown(agreementDetails));
     const handleAllChecker = () => {

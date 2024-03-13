@@ -1,12 +1,16 @@
+// const satisfiedResult = {
+//     result: true,
+//     message: "사용 가능한 아이디입니다."
+// };
 const satisfiedResult = {
-    result: true,
-    message: "사용 가능한 아이디입니다."
+    result: false,
+    message: "아이디 중복 확인을 해주세요."
 };
+
 
 export default function validateId(userInput) {
     const idValidatorList = [
         validateIfLengthOfIdIsEnough,
-        validateIfIdAlreadyExists,
     ];
 
     const relevantValidator = idValidatorList.find(validator => {
@@ -15,12 +19,6 @@ export default function validateId(userInput) {
     });
 
     return relevantValidator === undefined ? satisfiedResult : relevantValidator(userInput);
-}
-
-function validateIfIdAlreadyExists(userInput) {
-    const idList = ["aiden", "sasha"];
-    const existent = idList.filter(id => id === userInput).length > 0;
-    return !existent ? satisfiedResult : {result: false, message: "이미 존재하는 아이디입니다."};
 }
 
 function validateIfLengthOfIdIsEnough(userInput) {

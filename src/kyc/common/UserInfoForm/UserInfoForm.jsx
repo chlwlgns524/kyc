@@ -1,4 +1,4 @@
-import UserInput from "./UserInput/UserInput.jsx";
+import BasicUserInput from "./UserInput/BasicUserInput.jsx";
 import PropTypes from "prop-types";
 import TelephoneUserInput from "./UserInput/TelephoneUserInput.jsx";
 import MainForm from "../../../components/MainForm/MainForm.jsx";
@@ -9,11 +9,10 @@ import AmountUserInput from "./UserInput/AmountUserInput.jsx";
 import {INPUT_TYPE} from "./input-type.js";
 import AddressUserInput from "./UserInput/AddressUserInput.jsx";
 import EmailAuthUserInput from "./UserInput/EmailAuthUserInput.jsx";
-import {useContext} from "react";
-import CorporateUserContext from "../../signup/BusinessDetail/BusinessDetailCorporate/corporate-user-store.js";
+import IdUserInput from "./UserInput/IdUserInput.jsx";
 
-export default function UserInfoForm({title, description, referenceValue, userInputList, pickUserInput}) {
-    console.log("<UserInfoForm/> rendered!");
+export default function UserInfoForm({title, description, referenceValue, userInputList, user, pickUserInput}) {
+    // console.log("<UserInfoForm/> rendered!");
     // const {user, setUser, pickUserInput} = useContext(CorporateUserContext);
     return (
         <MainForm
@@ -24,6 +23,16 @@ export default function UserInfoForm({title, description, referenceValue, userIn
                 {
                     userInputList.map((userInput, index) => {
                         switch (userInput.inputType) {
+                            case INPUT_TYPE.ID:
+                                return <IdUserInput
+                                    key={userInput.id}
+                                    validator={userInput.validator}
+                                    id={userInput.id}
+                                    label={userInput.label}
+                                    essential={userInput.essential}
+                                    user={user}
+                                    pickUserInput={pickUserInput}
+                                />
                             case INPUT_TYPE.CONTACT:
                                 return <TelephoneUserInput
                                     key={userInput.id}
@@ -61,14 +70,16 @@ export default function UserInfoForm({title, description, referenceValue, userIn
                                 pickUserInput={pickUserInput}
                                 />
                             case INPUT_TYPE.BASIC:
-                                return <UserInput
+                                return <BasicUserInput
                                     key={userInput.id}
                                     id={userInput.id}
                                     label={userInput.label}
                                     placeholder={userInput.placeholder}
+                                    defaultValue={userInput.defaultValue}
                                     referenceValue={referenceValue}
                                     validator={userInput.validator}
                                     essential={userInput.essential}
+                                    user={user}
                                     pickUserInput={pickUserInput}
                                 />
                             case INPUT_TYPE.ADDRESS:
@@ -104,5 +115,6 @@ UserInfoForm.propTypes = {
     description: PropTypes.string,
     referenceValue: PropTypes.node,
     userInputList: PropTypes.array.isRequired,
+    user: PropTypes.array.isRequired,
     pickUserInput: PropTypes.func.isRequired,
 }

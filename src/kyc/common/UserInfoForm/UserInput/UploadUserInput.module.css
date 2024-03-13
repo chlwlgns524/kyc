@@ -17,7 +17,8 @@
     flex: 3;
     border-radius: 5px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 .5rem;
 }
 .fileNameDisplay > * {
     /*border: 1px dashed black;*/

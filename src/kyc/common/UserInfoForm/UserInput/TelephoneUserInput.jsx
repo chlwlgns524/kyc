@@ -1,4 +1,4 @@
-import commonStyles from "./UserInput.module.css";
+import commonStyles from "./BasicUserInput.module.css";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 
@@ -29,7 +29,7 @@ export default function TelephoneUserInput({id, label, placeholder, validator, e
             <div className={`${commonStyles.userInputWrapper}`}>
                 <div className={`${commonStyles.userInput} ${userInput !== '' && !valid ? commonStyles.warningBox : ""}`}>
                     <select onChange={e => setFrontNumber(e.target.value)}>
-                        <option value="">선택</option>
+                        <option value="-">선택</option>
                         {
                             frontNumbers.map(frontNumber =>
                                 <option key={frontNumber} value={frontNumber}>{frontNumber}</option>)

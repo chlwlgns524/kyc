@@ -1,8 +1,57 @@
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
 import {Link} from "react-router-dom";
 import styles from "./PaymentServiceCompleteContent.module.css";
+import {useEffect} from "react";
 
 export default function PaymentServiceCompleteContent() {
+    useEffect(() => {
+        // jQuery 추가
+        const jqueryScript = document.createElement("script");
+        jqueryScript.src = "https://code.jquery.com/jquery-1.12.4.min.js";
+        jqueryScript.async = true;
+        document.body.appendChild(jqueryScript);
+
+        // SDK 추가
+        const sdkScript = document.createElement("script");
+        sdkScript.src = "https://api-test.eximbay.com/v1/javascriptSDK.js";
+        sdkScript.async = true;
+        document.body.appendChild(sdkScript);
+
+        // Cleanup 함수 정의
+        return () => {
+            document.body.removeChild(jqueryScript);
+            document.body.removeChild(sdkScript);
+        };
+    }, []);
+
+    function payment() {
+        if (window.EXIMBAY) {
+            window.EXIMBAY.request_pay({
+                "fgkey": "0E9BE04BA239A519E68171F26B68604ADA0A85C8350DBF5C8C0FCCF98461DB09",
+                "payment": {
+                    "transaction_type": "PAYMENT",
+                    "order_id": "20220819105102",
+                    "currency": "USD",
+                    "amount": "1",
+                    "lang": "EN"
+                },
+                "merchant": {
+                    "mid": "1849705C64"
+                },
+                "buyer": {
+                    "name": "eximbay",
+                    "email": "test@eximbay.com"
+                },
+                "url": {
+                    "return_url": "eximbay.com",
+                    "status_url": "eximbay.com"
+                }
+            });
+        } else {
+            console.error('EXIMBAY SDK not loaded.');
+        }
+    }
+
     return (
         <>
             <div className={styles.messageContainer}>
@@ -14,11 +63,7 @@ export default function PaymentServiceCompleteContent() {
                 <p>추가 문의사항이나 도움이 필요하신 경우 onlinesupport@eximbay.com으로 문의해주시기 바랍니다.</p>
             </div>
             <div className={styles.buttonContainer}>
-                <Link to={"/"}>
-                    <MainButton label={'심사비 결제'} onClick={() => {
-                        alert('결제');
-                    }}/>
-                </Link>
+                <MainButton label={'심사비 결제'} onClick={payment}/>
                 <p className={styles.notice}>* 현재 결제가 어려우신 경우, 나중에 로그인하여 언제든지 결제를 진행하실 수 있습니다.</p>
             </div>
         </>

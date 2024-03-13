@@ -115,9 +115,11 @@ export default function CorporateUserProvider({children}) {
     ]);
 
     const pickUserInput = (id, validated, value) => {
-        setUser(prevUser =>
-            prevUser.map(info => (info.id === id ? {...info, validated, value} : info))
-        );
+        setUser(prevUser => {
+            return prevUser.map(info =>
+                    info.id === id ? {...info, validated: validated, value: value} : info
+            );
+        });
     };
 
     return (

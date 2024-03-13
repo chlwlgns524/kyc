@@ -1,4 +1,5 @@
 export const INPUT_TYPE = {
+    ID: Symbol('id'),
     ADDRESS: Symbol('address'),
     CONTACT: Symbol('contact'),
     UPLOAD: Symbol('upload'),

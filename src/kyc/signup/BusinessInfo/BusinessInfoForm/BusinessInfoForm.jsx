@@ -23,8 +23,7 @@ const reducer = (state, action) => {
 }
 
 export default function BusinessInfoForm() {
-    console.log("<BusinessInfoForm/> rendered!");
-
+    // console.log("<BusinessInfoForm/> rendered!");
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
@@ -81,10 +80,14 @@ export default function BusinessInfoForm() {
                 </li>
             </ul>
             <MainButtonContainer>
-                <Link
-                    to={`/business-detail/${state.businessCategory}`}>
-                    <MainButton label={'다음'}/>
-                </Link>
+                {
+                    state.businessLocation === 'abroad' ?
+                            <MainButton label={'다음'} onClick={() => alert('현재 사업장 소재지가 국내인 경우만 서비스 신청이 가능합니다.')}/>
+                            :
+                            <Link to={`/business-detail/${state.businessCategory}`}>
+                                <MainButton label={'다음'}/>
+                            </Link>
+                }
             </MainButtonContainer>
         </MainForm>
     )

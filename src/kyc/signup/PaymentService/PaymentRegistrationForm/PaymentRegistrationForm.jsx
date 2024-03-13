@@ -1,123 +1,290 @@
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
 import MainForm from "../../../../components/MainForm/MainForm.jsx";
 import {ContentBox} from "../../../../components/ContentBox/ContentBox.jsx";
 import styles from "./PaymentRegistrationForm.module.css";
 import SquareCheckBox from "../../../../components/MainCheckBox/SquareCheckBox.jsx";
 import BasicModal from "../../../../components/Modal/BasicModal.jsx";
-import NoticeTable from "./PaymentService/NoticeTable/NoticeTable.jsx";
+import NoticeTable from "./NoticeTable/NoticeTable.jsx";
 import CircleCheckBox from "../../../../components/MainCheckBox/CircleCheckBox.jsx";
 import {useState} from "react";
+import {updatePaymentDetail} from "../../../../api/sign-up.js";
+import {convertObjToList, PAYMENT_SERVICE_TYPE} from "../mapper/payment-service-mapper.js";
 
 export default function PaymentRegistrationForm() {
+    const navigator = useNavigate();
     const paymentServiceList = [
         {
             id: 'webOrMobile',
-            label: '웹/모바일결제'
+            label: '웹/모바일결제',
+            defaultValue: true,
         },
         {
             id: 'autoPayment',
-            label: '자동결제'
+            label: '자동결제',
+            defaultValue: false,
         },
         {
             id: 'linkPayment',
-            label: '링크결제(SMS 또는 이메일로 결제 URL 발송'
+            label: '링크결제(SMS 또는 이메일로 결제 URL 발송',
+            defaultValue: false,
         }
     ];
     const [paymentService, setPaymentService] = useState({
-        webOrMobile: false,
-        autoPayment: false,
-        linkPayment: false
+        webOrMobile: getObjectFromList(paymentServiceList, 'webOrMobile').defaultValue,
+        autoPayment: getObjectFromList(paymentServiceList, 'autoPayment').defaultValue,
+        linkPayment: getObjectFromList(paymentServiceList, 'linkPayment').defaultValue,
     });
 
     const paymentMethodList = [
         {
             id: 'creditCard',
             label: '신용카드 결제',
+            defaultValue: true,
             category: 'domestic'
         },
         {
             id: 'simplePayment',
             label: '간편결제(카카오페이/페이코/네이버페이/토스)',
+            defaultValue: false,
             category: 'domestic'
         },
         {
             id: 'cashPayment',
             label: '현금결제(가상계좌)',
+            defaultValue: false,
             category: 'domestic'
         },
         {
             id: 'globalCreditCard',
             label: '글로벌 신용카드 결제',
+            defaultValue: false,
             category: 'abroad'
         },
         {
             id: 'globalSimplePayment',
             label: '글로벌 간편결제(Paypal, Alipay+)',
+            defaultValue: false,
             category: 'abroad'
         },
         {
             id: 'chinesePayment',
             label: '중국결제(Wechat, Alipay)',
+            defaultValue: false,
             category: 'abroad'
         },
         {
             id: 'japanesePayment',
             label: '일본결제(eContext-편의점, 은행 결제)',
+            defaultValue: false,
             category: 'abroad'
         },
         {
             id: 'others',
             label: '기타해외결제',
+            defaultValue: false,
             category: 'abroad'
         }
     ];
     const [paymentMethod, setPaymentMethod] = useState({
         domestic: {
-            creditCard: false,
-            simplePayment: false,
-            cashPayment: false
+            creditCard: getObjectFromList(paymentMethodList, 'creditCard').defaultValue,
+            simplePayment: getObjectFromList(paymentMethodList, 'simplePayment').defaultValue,
+            cashPayment: getObjectFromList(paymentMethodList, 'cashPayment').defaultValue
         },
         aborad: {
-            globalCreditCard: false,
-            globalSimplePayment: false,
-            chinesePayment: false,
-            japanesePayment: false,
-            others: false
+            globalCreditCard: getObjectFromList(paymentMethodList, 'globalCreditCard').defaultValue,
+            globalSimplePayment: getObjectFromList(paymentMethodList, 'globalSimplePayment').defaultValue,
+            chinesePayment: getObjectFromList(paymentMethodList, 'chinesePayment').defaultValue,
+            japanesePayment: getObjectFromList(paymentMethodList, 'japanesePayment').defaultValue,
+            others: getObjectFromList(paymentMethodList, 'others').defaultValue
         }
     });
     const [description, setDescription] = useState('');
 
     const countryList = [
         {
-            id: 'korea',
-            label: '대한민국'
+            id: 'USD',
+            label: '미국',
+            defaultValue: true,
         },
         {
-            id: 'china',
-            label: '중국'
+            id: 'EUR',
+            label: '유럽',
+            defaultValue: false,
         },
         {
-            id: 'japan',
-            label: '일본'
+            id: 'JPY',
+            label: '일본',
+            defaultValue: false,
         },
         {
-            id: 'malaysia',
-            label: '말레이시아'
-        }
+            id: 'SGD',
+            label: '싱가폴',
+            defaultValue: false,
+        },
+        {
+            id: 'AUD',
+            label: '호주',
+            defaultValue: false,
+        },
+        {
+            id: 'HKD',
+            label: '홍콩',
+            defaultValue: false,
+        },
+        {
+            id: 'THB',
+            label: '태국',
+            defaultValue: false,
+        },
+        {
+            id: 'GBP',
+            label: '영국',
+            defaultValue: false,
+        },
+        {
+            id: 'CAD',
+            label: '캐나다',
+            defaultValue: false,
+        },
+        {
+            id: 'RUB',
+            label: '러시아',
+            defaultValue: false,
+        },
+        {
+            id: 'TWD',
+            label: '타이완',
+            defaultValue: false,
+        },
+        {
+            id: 'MYR',
+            label: '말레이시아',
+            defaultValue: false,
+        },
+        {
+            id: 'VND',
+            label: '베트남',
+            defaultValue: false,
+        },
+        {
+            id: 'PHP',
+            label: '필리핀',
+            defaultValue: false,
+        },
+        {
+            id: 'MNT',
+            label: '몽골',
+            defaultValue: false,
+        },
+        {
+            id: 'NZD',
+            label: '뉴질랜드',
+            defaultValue: false,
+        },
+        {
+            id: 'AED',
+            label: '아랍에미레이트',
+            defaultValue: false,
+        },
+        {
+            id: 'MOP',
+            label: '마카오',
+            defaultValue: false,
+        },
+        {
+            id: 'BRL',
+            label: '브라질',
+            defaultValue: false,
+        },
+        {
+            id: 'KZT',
+            label: '카자흐스탄',
+            defaultValue: false,
+        },
+        {
+            id: 'NOK',
+            label: '노르웨이',
+            defaultValue: false,
+        },
+        {
+            id: 'SAR',
+            label: '사우디아라비아',
+            defaultValue: false,
+        },
+        {
+            id: 'TRY',
+            label: '터키',
+            defaultValue: false,
+        },
+        {
+            id: 'KRW',
+            label: '한국',
+            defaultValue: false,
+        },
     ];
     const [targetCountry, setTargetCountry] = useState({
-        korea: false,
-        japan: false,
-        china: false,
-        malaysia: false,
-    })
+        USD: getObjectFromList(countryList, 'USD').defaultValue,
+        EUR: getObjectFromList(countryList, 'EUR').defaultValue,
+        JPY: getObjectFromList(countryList, 'JPY').defaultValue,
+        SGD: getObjectFromList(countryList, 'SGD').defaultValue,
+        AUD: getObjectFromList(countryList, 'AUD').defaultValue,
+        HKD: getObjectFromList(countryList, 'HKD').defaultValue,
+        THB: getObjectFromList(countryList, 'THB').defaultValue,
+        GBP: getObjectFromList(countryList, 'GBP').defaultValue,
+        CAD: getObjectFromList(countryList, 'CAD').defaultValue,
+        RUB : getObjectFromList(countryList, 'RUB').defaultValue,
+        TWD: getObjectFromList(countryList, 'TWD').defaultValue,
+        MYR: getObjectFromList(countryList, 'MYR').defaultValue,
+        VND: getObjectFromList(countryList, 'VND').defaultValue,
+        PHP: getObjectFromList(countryList, 'PHP').defaultValue,
+        MNT: getObjectFromList(countryList, 'MNT').defaultValue,
+        NZD: getObjectFromList(countryList, 'NZD').defaultValue,
+        AED: getObjectFromList(countryList, 'AED').defaultValue,
+        MOP: getObjectFromList(countryList, 'MOP').defaultValue,
+        BRL: getObjectFromList(countryList, 'BRL').defaultValue,
+        KZT: getObjectFromList(countryList, 'KZT').defaultValue,
+        NOK: getObjectFromList(countryList, 'NOK').defaultValue,
+        SAR: getObjectFromList(countryList, 'SAR').defaultValue,
+        TRY : getObjectFromList(countryList, 'TRY').defaultValue,
+        KRW: getObjectFromList(countryList, 'KRW').defaultValue,
+    });
+    console.log(targetCountry);
     const [finalAgreement, setFinalAgreement] = useState(false);
 
     const [openModal, setOpenModal] = useState(false);
     const handleOpenModal = () => setOpenModal(true);
     const hanldeCloseModal = () => setOpenModal(false);
+
+/*
+    const chunkSize = 4;
+    const numberOfLists = Math.ceil(countryList.length / chunkSize);
+    const lists = Array.from({ length: numberOfLists }, (_, index) => {
+        const start = index * chunkSize;
+        const end = start + chunkSize;
+        const chunk = countryList.slice(start, end);
+
+        return (
+                <ul key={index} className={styles.checkboxContainer}>
+                    {chunk.map(country => (
+                            <li key={country.id}>
+                                <SquareCheckBox
+                                        id={country.id}
+                                        checked={targetCountry[country.id]}
+                                        onChange={() => setTargetCountry(prevState => ({
+                                            ...prevState,
+                                            [country.id]: !prevState[country.id]
+                                        }))}
+                                />
+                                <label htmlFor={country.id}>{country.label}</label>
+                            </li>
+                    ))}
+                </ul>
+        );
+    });
+ */
 
     return (
         <>
@@ -210,9 +377,9 @@ export default function PaymentRegistrationForm() {
                     <div className={styles.serviceTarget}>
                         <div className={styles.label}>서비스 타겟 국가</div>
                         <div className={styles.checkBonxContainerWrapper}>
-                            <ul className={styles.checkboxContainer}>
+                            <ul className={styles.countryListContainer}>
                                 {
-                                    countryList.map(country =>
+                                    countryList.map((country) =>
                                         <li key={country.id}>
                                             <SquareCheckBox
                                                 id={country.id}
@@ -272,17 +439,75 @@ export default function PaymentRegistrationForm() {
                 </ContentBox>
             </MainForm>
             <MainButtonContainer>
+                <MainButton label={'이전'} onClick={() => navigator(-1)}/>
                 <MainButton label={'임시저장'} onClick={() => {
-                    alert('임시저장');
-                }
-                }/>
-                <Link to={"/payment-complete"}>
-                    <MainButton label={'다음'} onClick={() => {
-
-                        alert('다음');
-                    }}/>
-                </Link>
+                    updatePaymentDetail(
+                            convertObjToList(paymentService, PAYMENT_SERVICE_TYPE.paymentService),
+                            [...convertObjToList(paymentMethod.domestic, PAYMENT_SERVICE_TYPE.paymentMethod),
+                                ...convertObjToList(paymentMethod.aborad, PAYMENT_SERVICE_TYPE.paymentMethod)
+                            ],
+                            description,
+                            convertObjToList(targetCountry, PAYMENT_SERVICE_TYPE.countryCode)
+                    )
+                            .then(response => {
+                                console.log(response);
+                                const {responseCode, data} = response;
+                                if (responseCode === 'SUCCESS') {
+                                    alert('임시저장에 성공하였습니다.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error(error)
+                                alert('결제 서비스 신청에 실패하였습니다. 다시 시도해 주세요.');
+                            });
+                }}/>
+                <MainButton label={'다음'} onClick={() => {
+                    if (finalAgreement) {
+                        if (!checkIfOneIsCheckedAtLeast(paymentService))
+                            alert('결제 서비스를 하나 이상 선택해 주세요.');
+                        else if (!checkIfOneIsCheckedAtLeast(paymentMethod))
+                            alert('결제 수단을 적어도 하나 이상 선택해 주세요.');
+                        else if (!checkIfOneIsCheckedAtLeast(targetCountry))
+                            alert('서비스 타겟 국가를 적어도 하나 이상 선택해 주세요.');
+                        else {
+                           updatePaymentDetail(
+                                   convertObjToList(paymentService, PAYMENT_SERVICE_TYPE.paymentService),
+                                   [...convertObjToList(paymentMethod.domestic, PAYMENT_SERVICE_TYPE.paymentMethod),
+                                       ...convertObjToList(paymentMethod.aborad, PAYMENT_SERVICE_TYPE.paymentMethod)
+                                   ],
+                                   description,
+                                   convertObjToList(targetCountry, PAYMENT_SERVICE_TYPE.countryCode)
+                           )
+                                   .then(response => {
+                                       console.log(response);
+                                       const {responseCode, data} = response;
+                                       if (responseCode === 'SUCCESS') {
+                                           alert('결제 서비스에 성공하였습니다.');
+                                           navigator('/payment-complete');
+                                       }
+                                   })
+                                   .catch(error => {
+                                       console.log(error);
+                                       alert('결제 서비스 신청에 실패하였습니다. 다시 시도해 주세요.');
+                                   });
+                        }
+                    }
+                    else {
+                        alert('금지 업종 약관에 관한 동의가 필요합니다.');
+                    }
+                }}/>
             </MainButtonContainer>
         </>
     )
+}
+
+function getObjectFromList(list, id) {
+    return list.find(obj => obj.id === id);
+}
+
+function checkIfOneIsCheckedAtLeast(obj) {
+    for (const key in obj)
+        if (obj[key])
+            return true;
+    return false;
 }

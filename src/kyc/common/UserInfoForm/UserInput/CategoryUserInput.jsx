@@ -1,4 +1,4 @@
-import commonStyles from "./UserInput.module.css";
+import commonStyles from "./BasicUserInput.module.css";
 import styles from "./CategoryUserInput.module.css";
 import PropTypes from "prop-types";
 import {useState} from "react";
@@ -79,7 +79,7 @@ export default function CategoryUserInput({id, label, validator, essential, pick
                         }
                     </select>
                 </div>
-                <div className={`${commonStyles.warningBox} ${!updated ? '' : (valid ? commonStyles.confirm : commonStyles.warn)}`}>{cateogry.large !== '' ? message : ''}</div>
+                <div className={`${commonStyles.warningMessage} ${!updated ? '' : (valid ? commonStyles.confirm : commonStyles.warn)}`}>{cateogry.large !== '' ? message : ''}</div>
             </div>
         </div>
     )

@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 import styles from "./EmailAuthUserInput.module.css";
-import commonStyles from "./UserInput.module.css";
+import commonStyles from "./BasicUserInput.module.css";
 import axios from "axios";
-import {formatSecondsToStandardTime, generateAuthNumber} from "../../../../utils/utils.js";
+import {formatSecondsToStandardTime, generateAuthNumber} from "../../../signup/utils/utils.js";
 
 const TIME_LIMIT_IN_SECONDS = 180;
 const MAXIMUM_LENGTH_OF_AUTH_NUMBER = 6;
@@ -35,7 +35,7 @@ export default function EmailAuthUserInput({id, label, placeholder, validator, e
         setAuthNumber(newAuthNumber);
         //idkd uyfk ueat zfoo
         try {
-            const response = await axios.post('http://localhost:3001/send-email',
+            const response = await axios.post('http://172.29.1.111:3001/send-email',
                     {
                         to: emailInput,
                         authNumber: newAuthNumber

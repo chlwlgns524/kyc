@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {ContentBox} from "../../../../../../components/ContentBox/ContentBox.jsx";
+import {ContentBox} from "../../../../../components/ContentBox/ContentBox.jsx";
 
 const FlexContainer = styled.div`
     border-top: 2px solid black;

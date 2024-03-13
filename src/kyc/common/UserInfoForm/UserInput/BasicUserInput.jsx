@@ -1,41 +1,37 @@
-import commonStyles from "./UserInput.module.css";
+import commonStyles from "./BasicUserInput.module.css";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
+import {extractCurrentUserInfo} from "../../../signup/utils/utils.js";
 
-export default function UserInput({id, label, placeholder, referenceValue, validator, essential, pickUserInput}) {
+export default function BasicUserInput({id, label, placeholder, defaultValue, referenceValue, validator, essential, user, pickUserInput}) {
+    const currentUser = extractCurrentUserInfo(id, user);
     const [message, setMessage] = useState('');
-    const [userInput, setUserInput] = useState('');
-    const [valid, setValid] = useState(false);
 
     const hanldeUserInput = updatedValue => {
-        setUserInput(updatedValue);
-
         const validation = id === 'passwordCheck' ? validator(updatedValue, referenceValue) : validator(updatedValue);
-        setValid(validation.result);
         setMessage(validation.message);
         pickUserInput(id, validation.result, updatedValue);
     };
 
     useEffect(() => {
-        if (referenceValue)
-            hanldeUserInput(userInput);
-    }, [referenceValue]);
+        hanldeUserInput(currentUser.value);
+    }, [currentUser.value]);
 
     return (
         <div className={`${commonStyles.gridItem}`}>
             <label htmlFor={id}>{label} {essential ? <span className={`${commonStyles.essential}`}>*</span> : undefined}</label>
             <div className={`${commonStyles.userInputWrapper}`}>
-                <div className={`${commonStyles.userInput} ${userInput !== '' && !valid ? commonStyles.warningBox : undefined}`}>
+                <div className={`${commonStyles.userInput} ${currentUser.value !== defaultValue && !currentUser.validated ? commonStyles.warningBox : undefined}`}>
                     <input
                         placeholder={placeholder}
                         autoComplete="off"
                         type={`${isPasswordRelated(id) ? 'password' : 'text'}`}
-                           id={id}
-                           value={userInput}
-                           onChange={e => hanldeUserInput(e.target.value)}/>
-                    <span className={userInput !== '' && !valid ? commonStyles.warningBox : undefined}>!</span>
+                        id={id}
+                        value={currentUser.value}
+                        onChange={e => hanldeUserInput(e.target.value)}/>
+                    <span className={currentUser.value !== defaultValue && !currentUser.validated ? commonStyles.warningBox : undefined}>!</span>
                 </div>
-                <div className={`${commonStyles.warningMessage} ${userInput === '' ? '' : (valid ? commonStyles.confirm : commonStyles.warn)}`}>{userInput !== '' ? message : ''}</div>
+                <div className={`${commonStyles.warningMessage} ${currentUser.value === defaultValue ? '' : (currentUser.validated ? commonStyles.confirm : commonStyles.warn)}`}>{currentUser.value !== defaultValue ? message : ''}</div>
             </div>
         </div>
     )
@@ -46,12 +42,14 @@ function isPasswordRelated(id) {
     return regex.test(id);
 }
 
-UserInput.propTypes = {
+BasicUserInput.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
+    defaultValue: PropTypes.string,
     referenceValue: PropTypes.string,
     validator: PropTypes.func.isRequired,
     essential: PropTypes.bool.isRequired,
+    user: PropTypes.array.isRequired,
     pickUserInput: PropTypes.func.isRequired
 }

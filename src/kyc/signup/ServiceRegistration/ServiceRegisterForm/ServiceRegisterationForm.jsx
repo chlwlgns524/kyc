@@ -13,9 +13,12 @@ import {useNavigate} from "react-router-dom";
 import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
 import {INPUT_TYPE} from "../../../common/UserInfoForm/input-type.js";
 import UserInfoForm from "../../../common/UserInfoForm/UserInfoForm.jsx";
+import {signUp} from "../../../../api/sign-up.js";
+import {LOGIN_ID} from "../../../../global/global-const.js";
+import {checkUserInfo, extractUserValue} from "../../utils/utils.js";
 
 export default function ServiceRegisterationForm() {
-    console.log('<ServiceRegisterationForm/> rendered!');
+    // console.log('<ServiceRegisterationForm/> rendered!');
 
     const agreementDetails = [
         {
@@ -69,7 +72,7 @@ export default function ServiceRegisterationForm() {
             value: ''
         },
         {
-            id: 'company',
+            id: 'companyKrName',
             validated: false,
             value: ''
         },
@@ -98,9 +101,10 @@ export default function ServiceRegisterationForm() {
     const userInputList = [
         {
             id: 'id',
-            inputType: INPUT_TYPE.BASIC,
+            inputType: INPUT_TYPE.ID,
             label: '아이디',
             validator: validateId,
+            defaultValue: '',
             essential: true,
         },
         {
@@ -112,6 +116,7 @@ export default function ServiceRegisterationForm() {
             inputType: INPUT_TYPE.BASIC,
             label: '비밀번호',
             validator: validatePassword,
+            defaultValue: '',
             essential: true,
         },
         {
@@ -119,13 +124,15 @@ export default function ServiceRegisterationForm() {
             inputType: INPUT_TYPE.BASIC,
             label: '비밀번호 확인',
             validator: validatePasswordCheck,
+            defaultValue: '',
             essential: true,
         },
         {
-            id: 'company',
+            id: 'companyKrName',
             inputType: INPUT_TYPE.BASIC,
             label: '회사명',
             validator: validateCompany,
+            defaultValue: '',
             essential: true,
         },
         {
@@ -137,6 +144,7 @@ export default function ServiceRegisterationForm() {
             inputType: INPUT_TYPE.BASIC,
             label: '운영담당자명',
             validator: validateManager,
+            defaultValue: '',
             essential: true,
         },
         {
@@ -144,6 +152,7 @@ export default function ServiceRegisterationForm() {
             inputType: INPUT_TYPE.EMAIL_AUTH,
             label: '운영담당자 이메일',
             validator: validateManagerEmail,
+            defaultValue: '',
             essential: true,
         },
         {
@@ -151,6 +160,7 @@ export default function ServiceRegisterationForm() {
             inputType: INPUT_TYPE.CONTACT,
             label: '운영담당자 휴대전화번호',
             validator: validatePhoneNumber,
+            defaultValue: '',
             essential: true,
         },
         {
@@ -158,18 +168,21 @@ export default function ServiceRegisterationForm() {
             inputType: INPUT_TYPE.CONTACT,
             label: '운영담당자 유선전화번호',
             validator: validatePhoneNumber,
+            defaultValue: '',
             essential: false
         }
     ];
 
     const pickUserInput = (id, validated, value) => {
-        setUser(prevUser =>
-                prevUser.map(userDetail => (userDetail.id === id ? {...userDetail, validated, value} : userDetail))
-        );
+        setUser(prevUser => {
+            return prevUser.map(info =>
+                    info.id === id ? {...info, validated: validated, value: value} : info
+            );
+        });
     };
 
     const currentPassword = getCurrentPassword(user);
-    const navigate = useNavigate();
+    const navigator = useNavigate();
 
     return (
         <>
@@ -183,15 +196,34 @@ export default function ServiceRegisterationForm() {
                 description={'이후 회원가입 프로세스 진행 및 서비스 관리자 페이지 접속을 위해 필요한 로그인 정보를 생성합니다.'}
                 referenceValue={currentPassword}
                 userInputList={userInputList}
+                user={user}
                 pickUserInput={pickUserInput}
              />
             <MainButtonContainer>
                 <MainButton label={'회원가입'} onClick={() => {
-                    console.log(agreementCheckedList);
-                    user.forEach(info => console.log(info));
                     if (checkAgreementCheckList(agreementCheckedList) && checkUserInfo(user)) {
-                        alert('회원가입 성공!');
-                        navigate('/business-info');
+                        const {terms, personalInfo, marketing} = agreementCheckedList;
+                        const loginId = extractUserValue(user, 'id');
+                        const password = extractUserValue(user, 'password');
+                        const companyName = extractUserValue(user, 'companyKrName');
+                        const opName = extractUserValue(user, 'manager');
+                        const opMobileNo = extractUserValue(user, 'managerMobile');
+                        const opEmail = extractUserValue(user, 'managerEmail');
+                        const opTelNo = extractUserValue(user, 'managerTelephone');
+
+                        signUp({terms, personalInfo, marketing, loginId, password, companyName, opName, opMobileNo, opEmail, opTelNo})
+                                .then(response => {
+                                    console.log(response);
+                                    const {responseCode, data} = response;
+                                    if (responseCode === 'SUCCESS') {
+                                        sessionStorage.setItem(LOGIN_ID, loginId);
+                                        alert('회원가입 성공!');
+                                        navigator('/business-info');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                })
                     }
                 }}/>
             </MainButtonContainer>
@@ -206,15 +238,6 @@ function getCurrentPassword(user) {
 function checkAgreementCheckList(agreementCheckedList) {
     if (!(agreementCheckedList.terms && agreementCheckedList.personalInfo)) {
         alert('필수 약관에 동의해주세요.');
-        return false;
-    }
-    return true;
-}
-
-function checkUserInfo(user) {
-    const allValidated = user.every(info => info.validated);
-    if (!allValidated) {
-        alert('입력한 정보가 잘못되었습니다.');
         return false;
     }
     return true;

@@ -4,6 +4,5 @@ const satisfiedResult = {
 };
 
 export default function validatePasswordCheck(userInput, password) {
-    console.log(userInput, password);
     return userInput === password ? satisfiedResult : {result: false, message: "비밀번호가 일치하지 않습니다."};
 }

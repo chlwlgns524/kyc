@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BACK_END_IP_TEST} from "./server-info.js";
+import {BACK_END_IP_TEST, FRONT_END_IP_TEST} from "./server-info.js";
 import {LOGIN_ID} from "../global/global-const.js";
 
 const apiService = axios.create({
@@ -19,7 +19,7 @@ const post = async (url, data, headers = {'Content-Type': 'application/json'}) =
 
 export async function checkIdDuplication(loginId) {
     try {
-        return await get('onboarding/v1/account/id/exist', {loginId: loginId});
+        return await get('/onboarding/v1/account/id/exist', {loginId: loginId});
     } catch (error) {
         console.error(error);
     }
@@ -38,7 +38,7 @@ export async function signUp({
                                  opTelNo
                              }) {
     try {
-        const response = await post('onboarding/v1/account/signup',
+        const response = await post('/onboarding/v1/account/signup',
                 {
                     terms,
                     personalInfo,
@@ -104,7 +104,7 @@ export async function updateBusinessDetailPrivate({
         };
         formData.append("bizRegFile", bizRegFile);
         formData.append("kycVerificationInfo", new Blob([JSON.stringify(kycVerificationInfo)], {type: 'application/json'}));
-        return await post(`onboarding/v1/account/register/verify/prv/info/?loginId=${sessionStorage.getItem(LOGIN_ID)}`, formData, headers);
+        return await post(`/onboarding/v1/register/account/verify/prv/info/?loginId=${sessionStorage.getItem(LOGIN_ID)}`, formData, headers);
     } catch (error) {
         console.error(error);
     }
@@ -166,7 +166,7 @@ export async function updateBusinessDetailCorporate({
         };
         formData.append("bizRegFile", bizRegFile);
         formData.append("kycVerificationInfo", new Blob([JSON.stringify(kycVerificationInfo)], {type: 'application/json'}));
-        return await post(`onboarding/v1/account/register/verify/corp/info/?loginId=${sessionStorage.getItem(LOGIN_ID)}`, formData, headers);
+        return await post(`/onboarding/v1/account/register/verify/corp/info/?loginId=${sessionStorage.getItem(LOGIN_ID)}`, formData, headers);
     } catch (error) {
         console.error(error);
     }
@@ -174,7 +174,7 @@ export async function updateBusinessDetailCorporate({
 
 export async function updatePaymentDetail(payServiceType, payMethods, description, serviceTargetCountries) {
     try {
-        return await post(`onboarding/v1/register/account/payment/info?loginId=${sessionStorage.getItem(LOGIN_ID)}`, {
+        return await post(`/onboarding/v1/register/account/payment/info?loginId=${sessionStorage.getItem(LOGIN_ID)}`, {
             payServiceType: payServiceType,
             payMethods: payMethods,
             description: description,
@@ -186,32 +186,39 @@ export async function updatePaymentDetail(payServiceType, payMethods, descriptio
 }
 
 export async function generateFGKey() {
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic dGVzdF8xODQ5NzA1QzY0MkMyMTdFMEIyRDo=',
-    }
     try {
-        return await post(`'https://api-test.eximbay.com/v1/payments/ready`, {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic dGVzdF8xODQ5NzA1QzY0MkMyMTdFMEIyRDo=',
+        }
+        return await axios.post(`https://api-test.eximbay.com/v1/payments/ready`, {
                     "payment": {
                         "transaction_type": "PAYMENT",
-                        "order_id": "20220819105102",
+                        "order_id": `${sessionStorage.getItem(LOGIN_ID) + '1849705C64'}`,
                         "currency": "KRW",
                         "amount": "330000",
-                        "lang": "EN"
+                        "lang": "KR"
                     },
                     "merchant": {
-                        "mid": "1849705C64"
+                        "mid": `1849705C64`
                     },
+                    "product": [{
+                        "name": "심사비 결제",
+                        "quantity": "1"
+                    }],
                     "buyer": {
                         "name": `${sessionStorage.getItem(LOGIN_ID)}`,
-                        "email": "test@eximbay.com"
+                        "email": "aiden@eximbay.com"
+                    },
+                    "settings": {
+                        "autoclose": "Y"
                     },
                     "url": {
-                        "return_url": "eximbay.com",
-                        "status_url": "eximbay.com"
+                        "return_url": `${FRONT_END_IP_TEST}/payment-result`,
+                        "status_url": `${FRONT_END_IP_TEST}/payment-result`
                     }
                 }
-                , headers);
+                , {headers});
     } catch (error) {
         console.error(error);
     }

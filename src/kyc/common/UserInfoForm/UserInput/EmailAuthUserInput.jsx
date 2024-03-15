@@ -4,6 +4,7 @@ import styles from "./EmailAuthUserInput.module.css";
 import commonStyles from "./BasicUserInput.module.css";
 import axios from "axios";
 import {formatSecondsToStandardTime, generateAuthNumber} from "../../../signup/utils/utils.js";
+import {FRONT_END_IP_TEST} from "../../../../api/server-info.js";
 
 const TIME_LIMIT_IN_SECONDS = 180;
 const MAXIMUM_LENGTH_OF_AUTH_NUMBER = 6;
@@ -35,7 +36,7 @@ export default function EmailAuthUserInput({id, label, placeholder, validator, e
         setAuthNumber(newAuthNumber);
         //idkd uyfk ueat zfoo
         try {
-            const response = await axios.post('http://172.29.1.111:3001/send-email',
+            const response = await axios.post(`${FRONT_END_IP_TEST}/send-email`,
                     {
                         to: emailInput,
                         authNumber: newAuthNumber

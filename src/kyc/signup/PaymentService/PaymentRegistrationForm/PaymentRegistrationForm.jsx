@@ -379,7 +379,9 @@ export default function PaymentRegistrationForm() {
                         <div className={styles.checkBonxContainerWrapper}>
                             <ul className={styles.countryListContainer}>
                                 {
-                                    countryList.map((country) =>
+                                    countryList
+                                            .sort((a, b) => a.label.localeCompare(b.label, 'ko'))
+                                            .map((country) =>
                                         <li key={country.id}>
                                             <SquareCheckBox
                                                 id={country.id}

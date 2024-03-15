@@ -89,6 +89,7 @@ export default function UserInfoForm({title, description, referenceValue, userIn
                                     label={userInput.label}
                                     validator={userInput.validator}
                                     essential={userInput.essential}
+                                    user={user}
                                     pickUserInput={pickUserInput}
                                 />
                             case INPUT_TYPE.EMAIL_AUTH:

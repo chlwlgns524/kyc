@@ -9,6 +9,7 @@ import {
 import {
     BUSINESS_DETAIL_CORPORATE_FORM_ID
 } from "../../../signup/BusinessDetail/BusinessDetailCorporate/BusinessDetailCorporateForm/business-detail-corporate-form.js";
+import {FRONT_END_IP_TEST} from "../../../../api/server-info.js";
 
 export default function UploadUserInput({id, label, essential, pickUserInput}) {
     // console.log("<UploadUserInput/>");
@@ -26,7 +27,7 @@ export default function UploadUserInput({id, label, essential, pickUserInput}) {
         const formData = new FormData();
         formData.append('file', uploadedFile);
 
-        axios.post('http://localhost:3001/ekyc', formData)
+        axios.post(`${FRONT_END_IP_TEST}/ekyc`, formData)
                 .then(response => {
                     const startingPath = response.data.images[0].bizLicense.result;
                     console.log(startingPath);

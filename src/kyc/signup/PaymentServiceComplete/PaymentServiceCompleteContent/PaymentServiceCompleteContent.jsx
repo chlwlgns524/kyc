@@ -1,9 +1,12 @@
 import MainButton from "../../../../components/MainButton/MainButton.jsx";
-import {Link} from "react-router-dom";
 import styles from "./PaymentServiceCompleteContent.module.css";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {generateFGKey} from "../../../../api/sign-up.js";
+import {LOGIN_ID} from "../../../../global/global-const.js";
+import {FRONT_END_IP_TEST} from "../../../../api/server-info.js";
 
 export default function PaymentServiceCompleteContent() {
+    const [fgKey, setFgKey] = useState('');
     useEffect(() => {
         // jQuery 추가
         const jqueryScript = document.createElement("script");
@@ -17,6 +20,14 @@ export default function PaymentServiceCompleteContent() {
         sdkScript.async = true;
         document.body.appendChild(sdkScript);
 
+        generateFGKey()
+                .then(response => {
+                    const {rescode, fgkey} = response.data;
+                    if (rescode === '0000')
+                        setFgKey(fgkey);
+                })
+                .catch(error => console.log(error));
+
         // Cleanup 함수 정의
         return () => {
             document.body.removeChild(jqueryScript);
@@ -27,31 +38,37 @@ export default function PaymentServiceCompleteContent() {
     function payment() {
         if (window.EXIMBAY) {
             window.EXIMBAY.request_pay({
-                "fgkey": "0E9BE04BA239A519E68171F26B68604ADA0A85C8350DBF5C8C0FCCF98461DB09",
+                "fgkey": `${fgKey}`,
                 "payment": {
                     "transaction_type": "PAYMENT",
-                    "order_id": "20220819105102",
-                    "currency": "USD",
-                    "amount": "1",
-                    "lang": "EN"
+                    "order_id": `${sessionStorage.getItem(LOGIN_ID) + '1849705C64'}`,
+                    "currency": "KRW",
+                    "amount": "330000",
+                    "lang": "KR"
                 },
                 "merchant": {
                     "mid": "1849705C64"
                 },
+                "product": [{
+                    "name": "심사비 결제",
+                    "quantity": "1"
+                }],
                 "buyer": {
-                    "name": "eximbay",
-                    "email": "test@eximbay.com"
+                    "name": `${sessionStorage.getItem(LOGIN_ID)}`,
+                    "email": "aiden@eximbay.com"
+                },
+                "settings": {
+                    "autoclose": "Y"
                 },
                 "url": {
-                    "return_url": "eximbay.com",
-                    "status_url": "eximbay.com"
+                    "return_url": `${FRONT_END_IP_TEST}/payment-result`,
+                    "status_url": `${FRONT_END_IP_TEST}/payment-result`
                 }
             });
         } else {
             console.error('EXIMBAY SDK not loaded.');
         }
     }
-
     return (
         <>
             <div className={styles.messageContainer}>

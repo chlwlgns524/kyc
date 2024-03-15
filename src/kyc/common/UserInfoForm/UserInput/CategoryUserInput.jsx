@@ -74,7 +74,11 @@ export default function CategoryUserInput({id, label, validator, essential, pick
                         <option value="">선택</option>
                         {
                             cateogry.middle !== '' && Object.keys(PRODUCT_CATEGORY.large[cateogry.large].middle[cateogry.middle].small).map(
-                                small => <option key={small}>{small}</option>
+                                small =>
+                                {
+                                    const property = PRODUCT_CATEGORY.large[cateogry.large].middle[cateogry.middle].small[small];
+                                    return <option className={`${property.warning ? styles.warning : ''} ${property.prohibited ? styles.prohibited : ''}`} key={small}>{small}</option>
+                                }
                             )
                         }
                     </select>

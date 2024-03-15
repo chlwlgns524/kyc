@@ -1,7 +1,7 @@
 import commonStyles from "./BasicUserInput.module.css";
 import styles from "./AddressUserInput.module.css";
 import PropTypes from "prop-types";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import InputModal from "../../../../components/Modal/InputModal.jsx";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import SquareCheckBox from "../../../../components/MainCheckBox/SquareCheckBox.jsx";
@@ -10,6 +10,7 @@ import {
 } from "../../../signup/BusinessDetail/BusinessDetailCorporate/BusinessDetailCorporateForm/business-detail-corporate-form.js";
 
 export default function AddressUserInput({id, label, validator, essential, user, pickUserInput}) {
+    const [synchronizedChecked, setSynchronizedChecked] = useState(false);
     const [message, setMessage] = useState('');
     const [address, setAddress] = useState({
         country: 'kr',
@@ -35,12 +36,23 @@ export default function AddressUserInput({id, label, validator, essential, user,
         validateAddress(updatedAddress);
     }
     const handleSynchronize = () => {
-        const address = user.find(info => info.id === BUSINESS_DETAIL_CORPORATE_FORM_ID.address);
-        const synchronized = {
-            ...address.value
-        };
-        console.log(synchronized);
-        setAddress(synchronized);
+        setSynchronizedChecked(prevState => {
+            const newSynchronizedChecked = !prevState;
+            const address = user.find(info => info.id === BUSINESS_DETAIL_CORPORATE_FORM_ID.address);
+            const synchronized = {
+                ...address.value
+            };
+            const empty = {
+                country: 'kr',
+                zonecode: '',
+                addressKr: '',
+                additionalAddress: '',
+                addressEn: '',
+            };
+
+            setAddress(newSynchronizedChecked ? synchronized : empty);
+            return newSynchronizedChecked;
+        });
     }
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,6 +70,10 @@ export default function AddressUserInput({id, label, validator, essential, user,
         validateAddress(updatedAddress);
     }
 
+    useEffect(() => {
+        validateAddress(address);
+    }, [synchronizedChecked]);
+
     return (
         <div className={`${commonStyles.gridItem} ${commonStyles.span2}`}>
             <label htmlFor={id}>{label} {essential ? <span className={commonStyles.essential}>*</span> : undefined}</label>
@@ -71,8 +87,9 @@ export default function AddressUserInput({id, label, validator, essential, user,
                 {
                     id === BUSINESS_DETAIL_CORPORATE_FORM_ID.headStoreAddress ?
                     <div><SquareCheckBox
+                            checked={synchronizedChecked}
                             id={id}
-                            onClick={handleSynchronize}/> <label className={styles.synchronizeLabel} htmlFor={id}>본점의 주소가 사업장 주소와 같나요?</label></div>
+                            onChange={handleSynchronize}/> <label className={styles.synchronizeLabel} htmlFor={id}>본점의 주소가 사업장 주소와 같나요?</label></div>
                             : undefined
                 }
                 <div className={styles.postcodeWrapper}>

@@ -8,7 +8,7 @@ export default function BusinessInfo() {
         <BasicLayout
             Header={() => <BasicHeader
                 title={"사업자 정보 입력"}
-                diagram={() => <StateTransitionDiagram  current={'3'}/>}
+                diagram={() => <StateTransitionDiagram  current={'2'}/>}
             />}
             Body={() => <BusinessInfoForm/>}
         />

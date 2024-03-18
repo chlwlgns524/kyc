@@ -1,11 +1,11 @@
 import styles from "./Agreement.module.css";
-import MainCheckBox from "../../../../../components/MainCheckBox/MainCheckBox.jsx";
+import CircleCheckBox from "../../../../../components/MainCheckBox/CircleCheckBox.jsx";
 import downArrow from "../../../../../assets/images/free-icon-down-arrow.png";
 import {useState} from "react";
 import PropTypes from "prop-types";
 
 export default function Agreement({agreementChecked, setAgreementChecked, agreementDetails}) {
-    console.log("<Agreement/> rendered!");
+    // console.log("<Agreement/> rendered!");
 
     const [detailShown, setDetailShown] = useState(initDetailShown(agreementDetails));
     const handleAllChecker = () => {
@@ -23,7 +23,7 @@ export default function Agreement({agreementChecked, setAgreementChecked, agreem
                 진행합니다.</p>
             <ul className={styles.agreementContainer}>
                 <li>
-                    <MainCheckBox
+                    <CircleCheckBox
                         checked={Object.values(agreementChecked).every(value => value)}
                         onChange={handleAllChecker}
                     /> 이용약관, 개인정보처리, 마케팅 수단 이용에 모두 동의합니다.
@@ -32,7 +32,7 @@ export default function Agreement({agreementChecked, setAgreementChecked, agreem
                     agreementDetails.map(detail =>
                         <li key={detail.id}>
                             <div className={styles.agreementTitle}>
-                                <MainCheckBox
+                                <CircleCheckBox
                                     checked={agreementChecked[detail.id]}
                                     onChange={() => setAgreementChecked({
                                         ...agreementChecked,

@@ -1,7 +1,7 @@
 .container {
     /*border: 1px dashed black;*/
 }
-.item {
+.gridItem {
     /*border: 1px dashed orange;*/
     width: 50%;
 }
@@ -31,6 +31,6 @@
     gap: .5rem;
 }
 .radioButton > label {
-    font-size: var(--subFontSize-1);
+    font-size: var(--subFontSize-2);
     color: var(--subFontColor)
 }

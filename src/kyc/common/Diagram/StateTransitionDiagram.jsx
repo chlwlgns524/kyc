@@ -5,20 +5,24 @@ export default function StateTransitionDiagram({current}) {
     const states = [
         {
             label: "서비스 신청",
-            image: "abc.png"
+            image: "a.png"
         },
         {
-            label: "회원 가입",
-            image: "def.png"
+            label: "사업자정보 입력",
+            image: "b.png"
         },
         {
-            label: "가나다",
-            image: "abc.png"
+            label: "심사",
+            image: "c.png"
         },
         {
-            label: "라마바",
-            image: "def.png"
+            label: "계약",
+            image: "d.png"
         },
+        {
+            label: "심사완료",
+            image: "e.png"
+        }
     ];
 
     return (
@@ -48,7 +52,7 @@ export default function StateTransitionDiagram({current}) {
                                     `}>
                                     <span className={styles.image}>{state.image}</span>
                                 </div>
-                                <span className={styles.label}>{state.label} {index + 1 === parseInt(current) ? "t": "f"}</span>
+                                <span className={styles.label}>{state.label}</span>
                             </div>
                         )
                 }

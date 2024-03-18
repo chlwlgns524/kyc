@@ -1,0 +1,100 @@
+.container {
+    /*border: 1px dashed blue;*/
+    display: flex;
+    flex-direction: column;
+}
+.container > * {
+    /*border: 1px dashed red;*/
+    margin: 2rem 1rem;
+}
+.paymentService {
+    display: flex;
+    flex-wrap: wrap;
+}
+.label {
+    font-size: var(--titleFontSize-3);
+    font-weight: bold;
+    flex: 1;
+}
+.checkBonxContainerWrapper {
+    margin: 1rem;
+}
+.checkboxContainer {
+    flex: 2;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem;
+    font-size: var(--subFontSize-1);
+    color: var(--subFontColor)
+}
+.checkboxContainer > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.countryListContainer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 4개의 동일한 너비의 열 */
+    grid-gap: 10px; /* 그리드 아이템 사이의 간격 */
+}
+.paymentMethodInnerWrapper {
+    background-color: #faf8f8;
+    margin: 2rem;
+    padding: 2rem;
+    border-radius: 20px;
+}
+.paymentMethod {
+
+}
+.description {
+    border: 1px solid black;
+    margin: 2rem;
+    padding: 2rem;
+    border-radius: 20px;
+    line-height: 1rem;
+    height: 10rem;
+}
+.notice {
+    width: 80%;
+    margin: 2rem auto;
+}
+.exclamation {
+    border: 1px solid black;
+    display: inline-flex;
+    width: 1rem;
+    height: 1rem;
+    font-size: .8rem;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+.listContainer {
+    /*background-color: #4f4e4e;*/
+    display: flex;
+    flex-direction: column;
+    margin: 0 10rem;
+}
+.listContainer > * {
+    margin: .5rem;
+    list-style-type: disc;
+}
+.agreement {
+    margin: 5rem 0;
+    /*border: 1px dashed black;*/
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+    font-size: 1.25rem;
+    width: 100%;
+    font-weight: bold;
+}
+.productDescription {
+
+}
+.serviceTarget {
+
+}

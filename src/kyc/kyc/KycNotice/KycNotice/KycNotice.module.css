@@ -1,0 +1,54 @@
+.question {
+    margin: 2rem 0;
+}
+.infoTable {
+    border: 1px solid var(--gray200);
+}
+.mainColumn {
+    border: 1px solid var(--gray200);
+}
+.mainHeading {
+    background-color: var(--primaryColor);
+}
+.mainHeading > td {
+    color: var(--whiteColor);
+    font-weight: var(--fw700);
+}
+.heading {
+    text-align: center;
+}
+.innerTable {
+    width: 100%;
+    margin: 1rem auto;
+}
+.privateDocument {
+    text-align: center;
+}
+.infoTable td {
+    padding: .5rem 2rem;
+}
+.list {
+    position: relative;
+}
+.list::before {
+    content: "•";
+    position: absolute;
+    left: 1rem;
+}
+.notes {
+    color: var(--gray500);
+    font-size: var(--font14);
+    margin-left: 1rem;
+    text-indent: -1rem;
+}
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.notice {
+    color: var(--primaryColor-hover);
+    font-size: var(--subFontSize-1);
+}

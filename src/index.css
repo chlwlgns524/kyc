@@ -99,7 +99,8 @@ html {
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     word-break: keep-all;
-    box-sizing: border-box
+    box-sizing: border-box;
+    color: var(--mainBlack);
 }
 
 :before,

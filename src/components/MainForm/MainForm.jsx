@@ -5,7 +5,7 @@ export default function MainForm({title, description, children}) {
     return (
         <main className={styles.formContainer}>
             <div className={styles.titleWrapper}>
-                <h1>{title}</h1>
+                <h1 className={styles.title}>{title}</h1>
                 <p className={styles.description}>{description}</p>
             </div>
             {children}

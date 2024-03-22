@@ -11,6 +11,10 @@
 .titleWrapper > * {
     margin: 1rem 0;
 }
+.question {
+    color: var(--mainBlack)
+}
 .description {
     color: var(--subFontColor);
+    font-size: var(--font20);
 }

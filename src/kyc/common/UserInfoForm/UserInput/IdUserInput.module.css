@@ -1,4 +1,4 @@
-.authContainer {
+.authWrapper {
     /*border: 1px solid red;*/
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
 .item {
     height: 2rem;
 }
-.input {
+.choice {
     flex: 1;
 }
 .inputWrapper {
@@ -25,7 +25,7 @@
     height: 100%;
     padding: 0 .5rem;
 }
-.input {
+.choice {
     margin-right: .5rem;
 }
 .span {

@@ -1,7 +1,7 @@
 li > * {
     margin-right: .5rem;
 }
-.title {
+.logo {
     font-size: var(--titleFontSize-3);
     padding: 1rem;
 }

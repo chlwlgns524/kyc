@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {generateFGKey} from "../../../../api/sign-up.js";
 import {LOGIN_ID} from "../../../../global/global-const.js";
 import {FRONT_END_IP_TEST} from "../../../../api/server-info.js";
+import MainButtonContainer from "../../../../components/MainButton/MainButtonContainer.jsx";
 
 export default function PaymentServiceCompleteContent() {
     const [fgKey, setFgKey] = useState('');
@@ -79,10 +80,12 @@ export default function PaymentServiceCompleteContent() {
                 <br/>
                 <p>추가 문의사항이나 도움이 필요하신 경우 onlinesupport@eximbay.com으로 문의해주시기 바랍니다.</p>
             </div>
-            <div className={styles.buttonContainer}>
-                <MainButton label={'심사비 결제'} onClick={payment}/>
-                <p className={styles.notice}>* 현재 결제가 어려우신 경우, 나중에 로그인하여 언제든지 결제를 진행하실 수 있습니다.</p>
-            </div>
+            <MainButtonContainer>
+                <div className={styles.buttonContainer}>
+                    <MainButton label={'심사비 결제'} onClick={payment}/>
+                    <p className={styles.notice}>* 현재 결제가 어려우신 경우, 나중에 로그인하여 언제든지 결제를 진행하실 수 있습니다.</p>
+                </div>
+            </MainButtonContainer>
         </>
     )
 }
